@@ -1,1 +1,15 @@
-<h1>event index</h1>
+<div class="container my-4">
+  <% @events.each do |event| %>
+  <div class="card my-3 d-grid " style="max-width: 50%">
+    <div class="row">
+      <div class="col-4">
+        <img src="<%=event.event_img%>" class="rounded-start img-fluid" >
+      </div>
+      <div class="col-8 card-body">
+        <h5 class="card-title"><%= event.title%></h5>
+        <p class="card-text"><%= event.event_date %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
