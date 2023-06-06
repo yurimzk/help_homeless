@@ -1,2 +1,23 @@
-<h1><%= @event.title %></h1>
-<h2><%= @event.description %></h2>
+<div class="container py-3">
+  <div class="justify-content-center">
+    <img src=<%=@event.event_img%> class="img-fluid" alt="...">
+    <h1><%= @event.title %></h1>
+    <h2><%= @event.description %></h2>
+    <p>Event date: <%= @event.event_date %></p>
+  </div>
+</div>
+
+<div class="container py-3">
+  <div class="row justify-content-center">
+    <h4>Posts:</h2>
+    <ul>
+    <li>
+      <% @posts.each do |post| %>
+        <%= post.content %>
+      <% end %>
+    </li>
+    </ul>
+  </div>
+</div>
+
+<%# <p>Participants: <%= @event.participants %>

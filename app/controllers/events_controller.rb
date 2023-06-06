@@ -19,6 +19,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @posts = Post.where(event_id: @event.id)
   end
 
   def edit
