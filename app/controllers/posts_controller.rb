@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.user_id
+    @post.user_id = current_user.id
     @post.event_id = @event.id
     if @post.save
       redirect_to post_path(@post)
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def update
     @post.content = params[:content]
     @post.event_id = @event
-    @post.user_id = current_user
+    @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post)
     else
@@ -30,6 +30,7 @@ class PostsController < ApplicationController
   end
 
   private
+
   def set_post
     @post = Post.find(params[:id])
   end
