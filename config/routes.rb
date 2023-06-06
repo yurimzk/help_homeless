@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: "users#home" # checar ???
+  resources :user, only: %i[show update edit] do
+    resources :friends, only: %i[index create destroy]
+    resources :events do
+      resources :participants, only: %i[create update]
+      resources :posts, except: %i[index show edit new] do
+        resources :comments, only: %i[create update]
+      end
+    end
+    resources :chatrooms, only: %i[create] do
+      resources :messages, only: %i[create]
+    end
+  end
+  resources :comments, only: :destroy
+  resources :participants, only: :destroy
 end
