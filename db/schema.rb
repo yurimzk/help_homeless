@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_203921) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_134600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_203921) do
     t.datetime "updated_at", null: false
     t.index ["asker_id"], name: "index_friends_on_asker_id"
     t.index ["receiver_id"], name: "index_friends_on_receiver_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean "like_boo", default: false, null: false
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -94,6 +104,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_203921) do
   add_foreign_key "events", "users"
   add_foreign_key "friends", "users", column: "asker_id"
   add_foreign_key "friends", "users", column: "receiver_id"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "participants", "events"
