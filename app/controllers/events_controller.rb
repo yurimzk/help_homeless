@@ -12,25 +12,35 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to event_path
+      redirect_to event_path(@event)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # def new
-  # end
+  def show
+  end
 
-  # def new
-  # end
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to event_path(@event)
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   def destroy
+    @event.destroy
+    redirect_to root
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:title)
+    params.require(:event).permit(:title, :description, :event_date)
   end
 
   def set_event
