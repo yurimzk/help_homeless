@@ -1,3 +1,9 @@
+<div class="banner">
+  <div class="container">
+    <img src=<%=@event.event_img %> alt="...">
+  </div>
+</div>
+
 <div class="container py-3">
   <div class="justify-content-center">
     <img src=<%=@event.event_img%> class="img-fluid" alt="...">
@@ -5,21 +11,31 @@
     <h2><%= @event.description %></h2>
     <p>Event date: <%= @event.event_date %></p>
   </div>
+  <%= link_to "Events List", events_path, class:"btn btn-primary mb-2"%>
 </div>
-
 <div class="container">
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h4>Posts:</h2>
-            <% @posts.each do |post| %>
-              <%= image_tag post.user.profile_img, class: "w-25" %>
-              <h5 class="card-title"><%= post.user.first_name %></h5>
-              <p class="card-text"><%= post.content %></p>
-            <% end %>
+  <div class="container my-3">
+    <div class="card">
+     <div class="card-body">
+      <h1>Add a post</h1>
+        <%= simple_form_for [@event, @post] do |f| %>
+          <%= f.input :content %>
+          <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+        <% end %>
+      <h4>Posts:</h2>
+      <% @posts.each do |post| %>
+        <div class="row row-cols-1 row-cols-md-2 my-3">
+          <div class="col w-100">
+            <div class="card">
+              <div class="card-body">
+                <%= image_tag post.user.profile_img, class: "w-25" %>
+                <h5 class="card-title"><%= post.user.first_name %></h5>
+                <p class="card-text"><%= post.content %></p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
