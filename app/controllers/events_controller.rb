@@ -3,6 +3,10 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    if params[:query].present?
+      sql_subquery = "title ILIKE :query OR description ILIKE :query"
+      @events = @events.where(sql_subquery, query: "%#{params[:query]}%")
+    end
   end
 
   def new
