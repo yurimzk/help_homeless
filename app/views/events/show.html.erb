@@ -1,6 +1,6 @@
 <div class="container py-3">
   <div class="justify-content-center">
-    <img src=<%=@event.photo.key, height: 300, width: 400, crop: :fill %> class="img-fluid" alt="...">
+    <img src=<%=@event.event_img %> class="img-fluid" alt="...">
     <h1><%= @event.title %></h1>
     <h2><%= @event.description %></h2>
     <p>Event date: <%= @event.event_date %></p>
@@ -8,20 +8,20 @@
 </div>
 
 <div class="container">
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h4>Posts:</h2>
-            <% @posts.each do |post| %>
-              <%= image_tag post.user.profile_img, class: "w-25" %>
-              <h5 class="card-title"><%= post.user.first_name %></h5>
-              <p class="card-text"><%= post.content %></p>
-            <% end %>
+  <h4>Posts:</h2>
+  <% @posts.each do |post| %>
+    <div class="row row-cols-1 row-cols-md-2 my-3">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <%= image_tag post.user.profile_img, class: "w-25" %>
+            <h5 class="card-title"><%= post.user.first_name %></h5>
+            <p class="card-text"><%= post.content %></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <%# <p>Participants: <%= @event.participants %>
