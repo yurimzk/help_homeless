@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @post.event_id = @event.id
     if @post.save
-      redirect_to post_path(@post)
+      redirect_to event_path(@event)
     else
       render "events/show", status: unprocessable_entity
     end
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   end
 
   def set_event
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:event_id])
   end
 
   def post_params
