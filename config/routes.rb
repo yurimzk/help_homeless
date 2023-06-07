@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/home'
   devise_for :users
   root to: "users#home" # checar ???
   resources :user, only: %i[show update edit] do
