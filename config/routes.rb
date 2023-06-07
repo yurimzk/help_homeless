@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "users#home" # checar ???
-  resources :user, only: %i[show update edit] do
+  resources :users, only: %i[show update edit] do
     resources :friends, only: %i[index create destroy]
   end
   resources :chatrooms, only: %i[show create] do
