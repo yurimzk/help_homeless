@@ -1,18 +1,33 @@
-<div class="container my-4">
-  <% @events.each do |event| %>
-    <a href="<%=event_path(event) %>" class="text-decoration-none"><strong>
-      <div class="card my-3 d-grid " style="max-width: 50%">
-        <div class="row">
-          <div class="col-4">
-            <img src="<%=event.event_img%>" class="rounded-start img-fluid" >
-          </div>
-          <div class="col-8 card-body">
-            <h5 class="card-title"><%= event.title%></h5>
-            <p class="card-text"><%= event.event_date %></p>
+<div class="container show-events">
+  <div class="my-2">
+    <div class="col-8"></div>
+      <% @events.each do |event| %>
+        <a href="<%=event_path(event) %>" class="text-decoration-none"> </a>
+        <div class="card my-3 d-grid ">
+          <div class="row">
+            <div class="col-4">
+              <img src="<%=event.event_img%>" class="rounded-start img-fluid" >
+            </div>
+            <div class="col-8 card-body">
+              <h5 class="card-title"><%= event.title%></h5>
+              <p class="card-text"><%= event.event_date %></p>
+            </div>
           </div>
         </div>
-      </div>
-    </strong></a>
-  <% end %>
-  <%= link_to "Back to home", root_path, class:"btn btn-primary"%>
+      <% end %>
+    </div>
+    <div id='map' class="col-4 m-4 w-100">
+
+    </div>
+    <%= link_to "Back to home", root_path, class:"btn btn-primary"%>
+  </div>
 </div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic29uZWNhMjExMCIsImEiOiJjbGh0YmhvdngydHJhM25xbGhqNmVkNzVnIn0.d55HPqbdtlW4AE8yC6IoJg';
+  const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [<%=  %>, 40], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+  });
+</script>

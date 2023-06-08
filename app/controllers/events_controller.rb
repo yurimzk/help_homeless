@@ -7,6 +7,12 @@ class EventsController < ApplicationController
       sql_subquery = "title ILIKE :query OR description ILIKE :query"
       @events = @events.where(sql_subquery, query: "%#{params[:query]}%")
     end
+    @markers = @events.geocoded.map do |event|
+      {
+        lat: event.latitude,
+        lng: event.longitude
+      }
+    end
   end
 
   def new

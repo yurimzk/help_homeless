@@ -8,6 +8,8 @@ class Event < ApplicationRecord
   has_many :participants
   has_many :users, through: :participants
   has_one_attached :photo
+  geocoded_by :address
 
   validates :title, :description, :event_date, presence: true
+  after_validation :geocode, if: :will_save_change_to_address?
 end

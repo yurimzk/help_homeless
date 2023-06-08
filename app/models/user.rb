@@ -14,4 +14,6 @@ class User < ApplicationRecord
   has_many :events
   has_many :messages
   has_one_attached :avatar
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end
