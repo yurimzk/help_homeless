@@ -33,6 +33,7 @@ class EventsController < ApplicationController
     @post = Post.new
     @participants = Participant.where(event_id: @event.id)
     @participant = Participant.new(user_id: current_user, event_id: params[:id])
+    @comment = Comment.new
   end
 
   def edit
