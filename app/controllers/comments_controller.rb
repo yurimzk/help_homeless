@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
   before_action :set_post, only: %i[create update destroy]
-  before_action :set_comment, only: %i[create update destroy]
+  before_action :set_comment, only: %i[update destroy]
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.user_id = current_user.id
-    @comment.post_id = @post.id
+    @comment.user = current_user
+    @comment.post = @post
     if @comment.save
       redirect_to comment_path(@comment)
     else
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 
   def set_comment

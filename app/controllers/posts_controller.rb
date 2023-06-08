@@ -33,6 +33,8 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = @post.comments
   end
 
   def set_event
