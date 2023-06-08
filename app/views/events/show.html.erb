@@ -8,6 +8,7 @@
         <%= simple_form_for [@event, @participant] do |f| %>
           <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
         <% end %>
+
       </div>
   </div>
 </div>
@@ -39,6 +40,14 @@
                       </div>
                     </div>
                   </div>
+                  <% post.comments.each do |comment| %>
+                    <%= image_tag comment.user.profile_img, class: "w-25" %>
+                    <%= comment.content %>
+                  <% end %>
+                  <%= simple_form_for [post, @comment] do |f| %>
+                    <%= f.input :content %>
+                    <%= f.submit class: "btn btn-primary" %>
+                    <% end %>
                 </div>
               </div>
             </div>
