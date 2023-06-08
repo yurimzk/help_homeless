@@ -1,0 +1,10 @@
+.show-events {
+  display: grid;
+  grid-template-columns: 50% 50%
+}
+
+#map {
+  height: 730px;
+  position: sticky;
+  top: 0;
+}
