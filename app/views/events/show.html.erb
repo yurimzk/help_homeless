@@ -8,13 +8,12 @@
         <%= simple_form_for [@event, @participant] do |f| %>
           <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
         <% end %>
-
       </div>
   </div>
 </div>
 <div class="p-5 border mx-5">
   <div class="row">
-    <div class="col-8">
+    <div class="col-11">
       <div class="card">
         <div class="card-body">
           <h2>Add a post</h2>
@@ -23,44 +22,63 @@
             <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
           <% end %>
           <h4>Posts:</h4>
-          <% @posts.each do |post| %>
-            <div class="row row-cols-1 row-cols-md-2 my-3">
-              <div class="col w-100">
-                <div class="card">
-                  <div class="card-body d-flex">
-                    <div class="profile-pic">
-                      <%= image_tag post.user.profile_img, class: "avatar-large" %>
-                    </div>
-                    <div class="content-card">
-                      <div class="user-name">
-                        <h5 class="card-title m-3"><%= post.user.first_name %> <%= post.user.last_name %></h5>
-                      </div>
-                      <div class="post-content border m-3">
-                        <p class="card-text"><%= post.content %></p>
-                      </div>
-                    </div>
+          <div class="comments-container">
+            <ul id="comments-list" class="comments-list">
+              <li>
+                <% @posts.each do |post| %>
+                <div class="comment-main-level">
+                  <div class="comment-avatar">
+                      <%= image_tag post.user.profile_img %>
                   </div>
-                  <% post.comments.each do |comment| %>
-                    <%= image_tag comment.user.profile_img, class: "w-25" %>
-                    <%= comment.content %>
-                  <% end %>
-                  <%= simple_form_for [post, @comment] do |f| %>
-                    <%= f.input :content %>
-                    <%= f.submit class: "btn btn-primary" %>
-                  <% end %>
+                  <div class="comment-box">
+                    <div class="comment-head">
+                      <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
+                      <span>20 minutes ago</span>
+                      <i class="fa fa-reply"></i>
+                      <i class="fa fa-heart"></i>
+                    </div>
+                    <div class="comment-content">
+                      <%= post.content %>
+                    </div>
+                    <%= simple_form_for [post, @comment] do |f| %>
+                      <%= f.input :content %>
+                      <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-            </div>
-          <% end %>
+                <ul class="comments-list reply-list">
+                    <% post.comments.each do |comment| %>
+                      <li>
+                        <div class="comment-avatar">
+                            <%= image_tag comment.user.profile_img %>
+                        </div>
+                        <div class="comment-box">
+                          <div class="comment-head">
+                            <h6 class="comment-name">
+                              <%= comment.user.first_name %> <%= comment.user.last_name %> 10 minutes ago
+                          </div>
+                          <div class="comment-content">
+                            <%= comment.content %>
+                          </div>
+                        </div>
+                    <% end %>
+                      </li>
+                </ul>
+                <% end %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
-      <div class="card d-flex justify-content-center">
+    <div class="col-1">
+      <div class="card d-flex p-2">
         <h2><strong>Helpers</strong></h2>
-          <div class="helper-pic d-flex justify-content-between p-5">
+          <div class="d-flex flex-column px-4 py-2">
             <% @participants.each do |participant| %>
-              <%= image_tag participant.user.profile_img, class: "avatar-large" %>
+              <div class="helper-pic py-2">
+                <%= image_tag participant.user.profile_img, class: "avatar-large" %>
+              </div>
             <% end %>
           </div>
       </div>
