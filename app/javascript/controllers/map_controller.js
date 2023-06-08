@@ -3,18 +3,24 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    userLocation: Object
   }
 
-  connect() {
-    mapboxgl.accessToken = this.apiKeyValue
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
+  static targets = ["showMap"]
 
+  connect() {
+    console.log(this.userLocationValue)
+    mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10"
+      style: "mapbox://styles/mapbox/streets-v12",
+      center: [this.userLocationValue.lng, this.userLocationValue.lat], // starting position [lng, lat]
+      zoom: 9,
     })
+    this.#addMarkersToMap()
+    // this.#fitMapToMarkers()
+
   }
 
   #addMarkersToMap() {
@@ -22,7 +28,7 @@ export default class extends Controller {
       new mapboxgl.Marker()
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
-    })
+      })
   }
 
   #fitMapToMarkers() {

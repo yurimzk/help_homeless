@@ -1,10 +1,37 @@
 .show-events {
   display: grid;
-  grid-template-columns: 50% 50%
+  grid-template-columns: 60% 40%;
 }
 
+.show-events-cards {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
 #map {
   height: 730px;
   position: sticky;
   top: 0;
+}
+
+.card {
+  text-align: center;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  border-bottom-right-radius: 5px;
+}
+
+.card_img {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.container2 {
+  margin: 0 70px;
 }

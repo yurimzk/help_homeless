@@ -10,9 +10,14 @@ class EventsController < ApplicationController
     @markers = @events.geocoded.map do |event|
       {
         lat: event.latitude,
-        lng: event.longitude
+        lng: event.longitude,
+        id: event.id
       }
     end
+    @user_location = {
+      lat: current_user.latitude,
+      lng: current_user.longitude,
+    }
   end
 
   def new
