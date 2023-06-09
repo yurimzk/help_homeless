@@ -1,86 +1,88 @@
-<div class="p-5 border mx-5 d-flex justify-content-left mt-5">
-  <div class="d-inline-flex align-items-center px-4">
-    <img src=<%=@event.event_img%> class="img-fluid" alt="...">
-      <div class="flex-column p-4">
-        <h1><strong><%= @event.title %></strong></h1>
-        <h2><%= @event.description %></h2>
-        <p>Event date: <%= @event.event_date %></p>
-        <%= simple_form_for [@event, @participant] do |f| %>
-          <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
-        <% end %>
-      </div>
+<div class="">
+  <div class="event-show-display-grid p-5 border mx-5  justify-content-left mt-5">
+    <div class="d-inline-flex align-items-center px-4">
+      <img src=<%=@event.event_img%> class="img-fluid" alt="...">
+    </div>
+    <div class=" event-show-display-text p-4">
+      <h1><strong><%= @event.title %></strong></h1>
+      <h4><%= @event.description %></h4>
+      <h4>Event date: <%= @event.event_date %></h4>
+      <%= simple_form_for [@event, @participant] do |f| %>
+        <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div class="p-5 border mx-5">
-  <div class="row">
-    <div class="col-8">
-      <div class="card">
-        <div class="card-body">
-          <h2>Add a post</h2>
-          <%= simple_form_for [@event, @post] do |f| %>
-            <%= f.input :content %>
-            <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
-          <% end %>
-          <h4>Posts:</h4>
-          <div class="comments-container">
-            <ul id="comments-list" class="comments-list">
-              <li>
-                <% @posts.each do |post| %>
-                <div class="comment-main-level">
-                  <div class="comment-avatar">
-                      <%= image_tag post.user.profile_img %>
-                  </div>
-                  <div class="comment-box">
-                    <div class="comment-head">
-                      <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
-                      <span>20 minutes ago</span>
-                      <i class="fa fa-reply"></i>
-                      <i class="fa fa-heart"></i>
+  <div class="p-5 border mx-5">
+    <div class="row">
+      <div class="col-8">
+        <div class="card">
+          <div class="card-body">
+            <h2>Add a post</h2>
+            <%= simple_form_for [@event, @post] do |f| %>
+              <%= f.input :content %>
+              <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+            <% end %>
+            <h4>Posts:</h4>
+            <div class="comments-container">
+              <ul id="comments-list" class="comments-list">
+                <li>
+                  <% @posts.each do |post| %>
+                  <div class="comment-main-level">
+                    <div class="comment-avatar">
+                        <%= image_tag post.user.profile_img %>
                     </div>
-                    <div class="comment-content">
-                      <%= post.content %>
+                    <div class="comment-box">
+                      <div class="comment-head">
+                        <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
+                        <span>20 minutes ago</span>
+                        <i class="fa fa-reply"></i>
+                        <i class="fa fa-heart"></i>
+                      </div>
+                      <div class="comment-content">
+                        <%= post.content %>
+                      </div>
+                      <%= simple_form_for [post, @comment] do |f| %>
+                        <%= f.input :content %>
+                        <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+                      <% end %>
                     </div>
-                    <%= simple_form_for [post, @comment] do |f| %>
-                      <%= f.input :content %>
-                      <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
-                    <% end %>
                   </div>
-                </div>
-                <ul class="comments-list reply-list">
-                    <% post.comments.each do |comment| %>
-                      <li>
-                        <div class="comment-avatar">
-                            <%= image_tag comment.user.profile_img %>
-                        </div>
-                        <div class="comment-box">
-                          <div class="comment-head">
-                            <h6 class="comment-name">
-                              <%= comment.user.first_name %> <%= comment.user.last_name %> 10 minutes ago
+                  <ul class="comments-list reply-list">
+                      <% post.comments.each do |comment| %>
+                        <li>
+                          <div class="comment-avatar">
+                              <%= image_tag comment.user.profile_img %>
                           </div>
-                          <div class="comment-content">
-                            <%= comment.content %>
+                          <div class="comment-box">
+                            <div class="comment-head">
+                              <h6 class="comment-name">
+                                <%= comment.user.first_name %> <%= comment.user.last_name %> 10 minutes ago
+                            </div>
+                            <div class="comment-content">
+                              <%= comment.content %>
+                            </div>
                           </div>
-                        </div>
-                    <% end %>
-                      </li>
-                </ul>
-                <% end %>
-              </li>
-            </ul>
+                      <% end %>
+                        </li>
+                  </ul>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-4 d-grid">
-      <div class="card-helper p-2">
-        <h2><strong>Helpers</strong></h2>
-          <div class="d-flex flex-column px-4 py-2">
-            <% @participants.each do |participant| %>
-              <div class="helper-pic py-2">
-                <%= image_tag participant.user.profile_img, class: "avatar-large" %>
-              </div>
-            <% end %>
-          </div>
+      <div class="col-4 d-grid">
+        <div class="card-helper p-2">
+          <h2><strong>Helpers</strong></h2>
+            <div class="d-flex flex-column px-4 py-2">
+              <% @participants.each do |participant| %>
+                <div class="helper-pic py-2">
+                  <%= image_tag participant.user.profile_img, class: "avatar-large" %>
+                </div>
+              <% end %>
+            </div>
+        </div>
       </div>
     </div>
   </div>

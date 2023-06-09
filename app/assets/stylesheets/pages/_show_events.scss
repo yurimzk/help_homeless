@@ -3,9 +3,21 @@
   grid-template-columns: 60% 40%;
 }
 
+.event-show-display-grid {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.event-show-display-text {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
 .show-events-cards {
   display: grid;
   grid-template-columns: 50% 50%;
+  gap: 0 10px;
 }
 #map {
   height: 730px;
