@@ -1,24 +1,28 @@
 .events-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 200px;
-  grid-gap: 10px;
-  margin: 20px;
-  padding: 20px;
+  margin: 30px;
+  padding: 50px;
 }
 
 .next-event-card {
   border: 1px solid #000;
   width: 100%;
   height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
-.next-event-card > img {
-  height: 300px;
-  width: 100%;
-  object-fit: cover;
+.card-img {
+  margin: 52px;
+  margin-bottom: 10px;
 }
 
-.next-event-card-info {
+.card-info {
+  text-align: center;
+  padding: 10px 0;
 
+  h2 {
+    text-decoration: underline;
+  }
 }
