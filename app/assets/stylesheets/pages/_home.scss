@@ -1,4 +1,24 @@
-.events-card-grid {
+.events-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  grid-gap: 10px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.next-event-card {
+  border: 1px solid #000;
+  width: 100%;
+  height: 400px;
+}
+
+.next-event-card > img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.next-event-card-info {
+
 }
