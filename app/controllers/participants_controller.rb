@@ -23,7 +23,7 @@ class ParticipantsController < ApplicationController
   def destroy
     @participantdestroy = Participant.find(params[:id])
     @participantdestroy.destroy
-    redirect_to event_path(params[:id])
+    redirect_to event_path(@participantdestroy.event_id)
   end
 
   private
