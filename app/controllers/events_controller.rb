@@ -37,6 +37,7 @@ class EventsController < ApplicationController
   def show
     @posts = Post.where(event_id: @event.id)
     @post = Post.new
+    @participantdestroy = Participant.find_by(event_id: params[:id], user_id: current_user)
     @participant = Participant.new
     @participants = Participant.where(event_id: @event.id)
     @comment = Comment.new
