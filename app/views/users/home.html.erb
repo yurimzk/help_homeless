@@ -9,7 +9,17 @@
   </div>
 
   <div class="events-cards-grid">
-    <%# ITERAR EVENTOS DO USUÁRIO %>
-    <%# ITERAR DIAS RESTANTES ATÉ O EVENTO %>
+      <% @events_home.each do |event| %>
+        <% if (event.event_date - Date.today).to_i >= 0 %>
+          <div class="next-event-card">
+              <%# <img src=<%= image_tag event.event_img %>
+            <div class="card-info">
+              <%= event.title %>
+              <%= (event.event_date - Date.today).to_i %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

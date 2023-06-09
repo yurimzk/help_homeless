@@ -8,13 +8,6 @@ class UsersController < ApplicationController
     @participants.each do |participant|
       @events_home << Event.find(participant.event_id)
     end
-    @events_home.each do |event|
-      if (event.event_date - Date.today).to_i <= 0
-        @events_days << 0
-      else
-        @events_days << (event.event_date - Date.today).to_i
-      end
-    end
   end
 
   def show
