@@ -26,12 +26,24 @@ body {
  background: #dee1e3;
 }
 
+.card-helper {
+  text-align: center;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  background-position: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: $color-bg;
+}
+
+
 /** ====================
 * Lista de Comentarios
 =======================*/
 .comments-container {
  margin: 60px 0 15px;
- width: 768px;
+ width: 800px;
 }
 
 .comments-container h1 {
