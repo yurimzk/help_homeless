@@ -2,9 +2,11 @@ class ParticipantsController < ApplicationController
   before_action :set_participant, only: %i[update destroy]
 
   def create
-    @participant = Participant.new(participant_params)
+    @participant = Participant.new
+    @participant.user_id = current_user.id
+    @participant.event_id = params[:event_id]
     if @participant.save
-      redirect_to event_path(@participant)
+      redirect_to event_path(params[:event_id])
     else
       render :new, status: :unprocessable_entity
     end
