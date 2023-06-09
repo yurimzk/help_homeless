@@ -1,5 +1,5 @@
 class ParticipantsController < ApplicationController
-  before_action :set_participant, only: %i[update destroy]
+  before_action :set_participant, only: %i[update]
 
   def create
     @participant = Participant.new
@@ -21,8 +21,9 @@ class ParticipantsController < ApplicationController
   end
 
   def destroy
-    @participant.destroy
-    redirect_to participants_path
+    @participantdestroy = Participant.find(params[:id])
+    @participantdestroy.destroy
+    redirect_to event_path(params[:id])
   end
 
   private
