@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
   resources :comments, only: :destroy
   resources :participants, only: :destroy
+  resources :likes, only: %i[create destroy]
 end

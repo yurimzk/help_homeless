@@ -39,8 +39,16 @@
                       <div class="comment-head">
                         <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
                         <span>20 minutes ago</span>
-                        <i class="fa fa-reply"></i>
-                        <i class="fa fa-heart"></i>
+                        <i class="fa-solid fa-comment"></i>
+                        <i>
+                          <% like = current_user.likes.find_by(post: post) %>
+                          <% if like.nil? %>
+                            <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
+                          <% else %>
+                            <%= button_to "Unlike", like_path(like), method: :delete %>
+                          <% end %>
+                        </i>
+                        <i><%= post.likes.count %></i>
                       </div>
                       <div class="comment-content">
                         <%= post.content %>
