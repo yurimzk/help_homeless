@@ -10,7 +10,7 @@ export default class extends Controller {
   static targets = ["showMap"]
 
   connect() {
-    console.log(this.userLocationValue)
+    console.log(this.userLocationValue.marker_html)
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
@@ -18,6 +18,7 @@ export default class extends Controller {
       center: [this.userLocationValue.lng, this.userLocationValue.lat], // starting position [lng, lat]
       zoom: 11,
     })
+    this.#addUserMarkersToMap()
     this.#addMarkersToMap()
     // this.#fitMapToMarkers()
 
@@ -29,6 +30,15 @@ export default class extends Controller {
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
       })
+  }
+
+  #addUserMarkersToMap() {
+
+    const customMarker = document.createElement("div")
+    customMarker.innerHTML = this.userLocationValue.marker_html
+      new mapboxgl.Marker(customMarker)
+        .setLngLat([ this.userLocationValue.lng, this.userLocationValue.lat ])
+        .addTo(this.map)
   }
 
   #fitMapToMarkers() {
