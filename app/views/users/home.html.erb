@@ -1,11 +1,12 @@
 <%= link_to "Events List", events_path, class:"btn btn-primary"%>
 
 <div class="user-home-page d-flex flex-column">
+  <%# SUGGESTED EVENTS CAROUSEL %>
   <div class="carousel">
-    <%# FAZER CARROSSEL %>
+
   </div>
 
-  <%################ NEXT EVENTS CARDS ################%>
+  <%# NEXT EVENTS CARDS %>
   <h2 class="next-event-heading">Next Events</h2>
   <div class="events-cards-grid">
     <% @events_home.select { |event| (event.event_date - Date.today).to_i >= 0 }
