@@ -1,3 +1,8 @@
+// CAROUSEL
+
+
+
+// HOME NEXT EVENTS
 .events-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -17,7 +22,7 @@
   overflow: hidden;
   position: relative;
   transition: all 0.2s ease-out;
-  border: 1px solid #333;
+  border: 1px solid #cccccc;
 
   .card-img {
     width: 100%;
