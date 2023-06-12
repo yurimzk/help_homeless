@@ -13,6 +13,9 @@ class UsersController < ApplicationController
   def show
   end
 
+  def landing
+  end
+
   def edit
     @user = User.new
   end
