@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "users#home"
+  root to: "users#landing"
+  get "/my_events", to: "users#home", as: :my_events
   resources :users, only: %i[show update edit] do
     resources :friends, only: %i[index create destroy]
   end
