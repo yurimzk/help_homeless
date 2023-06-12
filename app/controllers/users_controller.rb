@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit]
+  before_action :set_user, only: %i[edit show]
 
   def home
     @events_home = []
@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @friends = Friend.all
+    @friend = Friend.new
   end
 
   def landing
