@@ -11,10 +11,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_friend = User.find_by(email: params[:email])
-    if Invitation.reacted?(current_user, @user_friend)
-      send_invitation(@user_friend)
-    end
+    @friends = Friend.all
+    @friend = Friend.new
   end
 
   def edit

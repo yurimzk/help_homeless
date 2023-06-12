@@ -1,15 +1,42 @@
-<h1>user show</h1>
-<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<!-- Adicionar amigo -->
+<form action="/users/:user_id/friends(@user, @friend)" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label for="first_name">First Name:</label>
+  <input type="first_name" name="first_name" required>
+  <label for="last_name">Last Name:</label>
+  <input type="last_name" name="last_name" required>
+  <input type="submit" value="Add a Friend">
 </form>
 
-<form action="/show" method="post" accept-charset="UTF-8" >
-  <label for="email">Search for:</label>
-  <input id="email" name="email" type="text" />
-  <input name="commit" type="submit" value="Add a Friend" data-disable-with="Email" />
-</form>
+<%= simple_form_for [@user, @friend] do |f| %>
+      <%# <%= f.input :first_name %>
+      <%= f.association :receiver, label_method: :full_name %>
+        <%= f.submit 'Create', class: "btn btn-primary" %>
+    <% end %>
+
+<!-- Mostrar todos os amigos -->
+<h2>Your Friends</h2>
+<ul>
+  <% @friends.each do |friend| %>
+    <li><% if friend.confirmed == true %>
+          <%if friend.asker_id != current_user.id %>
+            <% @user = User.find(friend.asker_id) %>
+            <%= image_tag @user.profile_img, class: "avatar-large" %>
+          <% else %>
+            <% @user = User.find(friend.receiver_id) %>
+            <%= image_tag @user.profile_img, class: "avatar-large" %>
+          <% end %>
+        <% end %>
+    </li>
+  <% end %>
+</ul>
+<h2>Your Requests</h2>
+<ul>
+  <% @friends.each do |friend| %>
+    <li><%if friend.asker_id != current_user.id && friend.confirmed == false %>
+            <% @user = User.find(friend.asker_id) %>
+            <%= image_tag @user.profile_img, class: "avatar-large" %>
+        <% end %>
+    </li>
+  <% end %>
+</ul>

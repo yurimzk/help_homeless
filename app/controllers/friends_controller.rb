@@ -5,10 +5,15 @@ class FriendsController < ApplicationController
 
   def create
     @asker_id = current_user
-    @receiver_id = User.where(first_name: params[:content], last_name: params[]) ###### TESTAR ######
-    Friend.create(asker_id: @asker_id, receiver_id: @receiver_id)
+    @receiver_id = User.find(friend_params[:receiver_id].to_i) ###### TESTAR ######
+    @friend = Friend.new!(asker: @asker_id, receiver: @receiver_id)
   end
 
+  private
+
+  def friend_params
+    params.require(:friend).permit(:first_name, :last_name, :receiver_id)
+  end
   ################################ DEIXAR PRA DEPOIS ###################################
   # def destroy
   #   if receiver_id == current_user
