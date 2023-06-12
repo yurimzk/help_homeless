@@ -5,25 +5,26 @@
     <%# FAZER CARROSSEL %>
   </div>
 
-<%################ NEXT EVENTS CARDS ################%>
-  <h2 class="card-info">Next Events</h2>
+  <%################ NEXT EVENTS CARDS ################%>
+  <h2 class="next-event-heading">Next Events</h2>
   <div class="events-cards-grid">
-      <% @events_home.each do |event| %>
-        <% if (event.event_date - Date.today).to_i >= 0 %>
-          <div class="next-event-card">
-            <div class="card-img" style="background-image: url('<%=event.event_img%>');
-            background-size: cover;
-            height: 80%;
-            width: 80%;
-            background-position: center;">
-            </div>
-            <div class="card-info">
-              <h4><strong><%= event.title %></strong></h4>
-              <h5><%= (event.event_date - Date.today).to_i %> days left</h5>
-            </div>
+    <% @events_home.select { |event| (event.event_date - Date.today).to_i >= 0 }
+                  .sort_by { |event| (event.event_date - Date.today).to_i }
+                  .each do |event| %>
+      <%= link_to event_path(event) do %>
+        <div class="next-event-card">
+            <img src="<%=event.event_img%>" alt="" class="card-img">
+          <div class="card-info">
+            <h4><strong><%= event.title %></strong></h4>
+            <h5><%= event.event_date.strftime("%B %d") %></h5>
+              <% if (event.event_date - Date.today).to_i.zero? %>
+                <p><em><strong style="color: #4CAF50;">Today!</strong></em></p>
+              <% elsif (event.event_date - Date.today).to_i > 0 %>
+                <p><em>in <strong style="color: red;"><%= (event.event_date - Date.today).to_i %></strong> days</em></p>
+              <% end %>
           </div>
-        <% end %>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
