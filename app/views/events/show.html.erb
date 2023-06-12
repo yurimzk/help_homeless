@@ -43,9 +43,18 @@
                         <i>
                           <% like = current_user.likes.find_by(post: post) %>
                           <% if like.nil? %>
-                            <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
+                            <%= button_to likes_path,
+                                          params: { like: { post_id: post.id } },
+                                          style:"border: none; background: none; width: 16px;",
+                                          method: :post do %>
+                              <i class="fa-regular fa-hand-peace"></i>
+                            <% end %>
                           <% else %>
-                            <%= button_to "Unlike", like_path(like), method: :delete %>
+                            <%= button_to like_path(like),
+                                          style:"border: none; background: none; width: 16px;",
+                                          method: :delete do %>
+                              <i class="fa-regular fa-hand-peace" style="color: #ff0000;"></i>
+                            <% end %>
                           <% end %>
                         </i>
                         <i><%= post.likes.count %></i>
