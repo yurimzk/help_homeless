@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit]
+  before_action :set_user, only: %i[edit show]
 
   def home
     @events_home = []
@@ -11,6 +11,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user_friend = User.find_by(email: params[:email])
+    if Invitation.reacted?(current_user, @user_friend)
+      send_invitation(@user_friend)
+    end
   end
 
   def edit

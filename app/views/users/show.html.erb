@@ -1,1 +1,15 @@
 <h1>user show</h1>
+<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<form action="/show" method="post" accept-charset="UTF-8" >
+  <label for="email">Search for:</label>
+  <input id="email" name="email" type="text" />
+  <input name="commit" type="submit" value="Add a Friend" data-disable-with="Email" />
+</form>
