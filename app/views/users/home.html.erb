@@ -16,7 +16,7 @@
             <img src="<%=event.event_img%>" alt="" class="card-img">
           <div class="card-info">
             <h4><strong><%= event.title %></strong></h4>
-            <h5><%= event.event_date.strftime("%B %d") %></h5>
+              <h5><%= event.event_date.strftime("%B ") + event.event_date.day.ordinalize %></h5>
               <% if (event.event_date - Date.today).to_i.zero? %>
                 <p><em><strong style="color: #4CAF50;">Today!</strong></em></p>
               <% elsif (event.event_date - Date.today).to_i > 0 %>
