@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["content"]
+  static targets = ["form"]
 
-  revealContent() {
-    // this.contentTarget.classList.toggle("beforeend", render)
+  toggle() {
+    this.formTarget.classList.toggle("d-none")
   }
 }

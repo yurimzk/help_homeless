@@ -29,7 +29,7 @@
               <%= f.input :content %>
               <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
             <% end %>
-            <h4>Posts:</h4>
+            <h4>Posts</h4>
             <div class="comments-container">
               <ul id="comments-list" class="comments-list">
                 <li>
@@ -38,11 +38,11 @@
                     <div class="comment-avatar">
                         <%= image_tag post.user.profile_img %>
                     </div>
-                    <div class="comment-box">
+                    <div class="comment-box" data-controller="comments">
                       <div class="comment-head">
                         <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
-                        <span>20 minutes ago</span>
-                        <i class="fa-solid fa-comment"></i>
+                        <span><%= post.created_at %></span>
+                        <i class="fa-solid fa-comment" data-action="click->comments#toggle"></i>
                         <i>
                           <% like = current_user.likes.find_by(post: post) %>
                           <% if like.nil? %>
@@ -50,13 +50,13 @@
                                           params: { like: { post_id: post.id } },
                                           style:"border: none; background: none; width: 16px;",
                                           method: :post do %>
-                              <i class="fa-regular fa-hand-peace"></i>
+                              <i class="fa-solid fa-hand-peace"></i>
                             <% end %>
                           <% else %>
                             <%= button_to like_path(like),
                                           style:"border: none; background: none; width: 16px;",
                                           method: :delete do %>
-                              <i class="fa-regular fa-hand-peace" style="color: #ff0000;"></i>
+                              <i class="fa-solid fa-hand-peace" style="color: #ff0000;"></i>
                             <% end %>
                           <% end %>
                         </i>
@@ -65,10 +65,12 @@
                       <div class="comment-content">
                         <%= post.content %>
                       </div>
-                      <%= simple_form_for [post, @comment] do |f| %>
-                        <%= f.input :content %>
-                        <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
-                      <% end %>
+                        <div data-comments-target="form" class="d-none">
+                          <%= simple_form_for [post, @comment] do |f| %>
+                            <%= f.input :content %>
+                            <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+                          <% end %>
+                        </div>
                     </div>
                   </div>
                   <ul class="comments-list reply-list">
@@ -80,7 +82,7 @@
                           <div class="comment-box">
                             <div class="comment-head">
                               <h6 class="comment-name">
-                                <%= comment.user.first_name %> <%= comment.user.last_name %> 10 minutes ago
+                                <%= comment.user.first_name %> <%= comment.user.last_name %> <%= comment.created_at %>
                             </div>
                             <div class="comment-content">
                               <%= comment.content %>
@@ -98,17 +100,17 @@
       </div>
       <div class="col-4 d-grid">
         <div class="card-helper p-2">
-          <div class="owner">
-            <h2>Owner:</h2>
-            <div class="d-flex flex-column px-4 py-2 align-items-start">
+          <div class="owner my-3">
+            <h2>Owner</h2>
+            <div class="d-flex flex-column px-4 py-1 align-items-start">
               <p>
                 <%= image_tag @event.user.profile_img, class: "avatar-large mx-2" %> <%= @event.user.first_name %> <%= @event.user.last_name %>
               </p>
             </div>
           </div>
           <div class="helper">
-            <h2 class="py-2">Helpers:</h2>
-              <div class="d-flex flex-column px-4 py-2 align-items-start">
+            <h2 class="py-3">Helpers</h2>
+              <div class="d-flex flex-column px-4 py-1 align-items-start">
                 <% @participants.each do |participant| %>
                   <p>
                   <%= image_tag participant.user.profile_img, class: "avatar-large mx-2" %> <%= participant.user.first_name %> <%= participant.user.last_name %>
