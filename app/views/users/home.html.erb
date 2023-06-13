@@ -2,30 +2,61 @@
 
 <div class="user-home-page d-flex flex-column">
   <%# SUGGESTED EVENTS CAROUSEL %>
-  <div class="carousel">
+  <div class="home">
+    <div class="home-popular">
+      <h3>Events near you</h3>
 
+      <div class="slider">
+        <div class="slider-prev"></div>
+
+          <% @events_location.each do |event| %>
+            <ul class="carousel-ul">
+              <li class="carousel-event-list">
+              <%# Make if / else %>
+                <img class="item" src="<%=event.event_img%>" alt="">
+              </li>
+            </ul>
+
+            <div class="description">
+            <%# Make if / else %>
+              <h4><strong><%= event.title %></strong></h4>
+              <h4><%= event.event_date.strftime("%B ") + event.event_date.day.ordinalize %></h4>
+            </div>
+
+            <div class="further-description">
+            <%# Make if / else %>
+              <p><%= event.description %></p>
+            </div>
+          <% end %>
+
+        <div class="slider-next"></div>
+
+      </div>
+    </div>
   </div>
 
   <%# NEXT EVENTS CARDS %>
-  <h2 class="next-event-heading">Next Events</h2>
-  <div class="events-cards-grid">
-    <% @events_home.select { |event| (event.event_date - Date.today).to_i >= 0 }
+  <div class="next-events">
+    <h2 class="home-sub-heading">Next Events</h2>
+    <div class="events-cards-grid">
+      <% @events_home.select { |event| (event.event_date - Date.today).to_i >= 0 }
                   .sort_by { |event| (event.event_date - Date.today).to_i }
                   .each do |event| %>
-      <%= link_to event_path(event) do %>
-        <div class="next-event-card">
+        <%= link_to event_path(event) do %>
+          <div class="next-event-card">
             <img src="<%=event.event_img%>" alt="" class="card-img">
-          <div class="card-info">
-            <h4><strong><%= event.title %></strong></h4>
+            <div class="card-info">
+              <h4><strong><%= event.title %></strong></h4>
               <h5><%= event.event_date.strftime("%B ") + event.event_date.day.ordinalize %></h5>
               <% if (event.event_date - Date.today).to_i.zero? %>
                 <p><em><strong style="color: #4CAF50;">Today!</strong></em></p>
               <% elsif (event.event_date - Date.today).to_i > 0 %>
                 <p><em>in <strong style="color: red;"><%= (event.event_date - Date.today).to_i %></strong> days</em></p>
               <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>

@@ -1,6 +1,161 @@
 // CAROUSEL
+.home,
+.home-popular,
+.home-popular h3 {
+  width: fit-content;
+}
 
+.home {
+  display: flex;
+  flex-direction: row;
+}
 
+.home-popular {
+  padding: 25vh 8vw 15vh 3vw;
+  width: 63%;
+}
+
+.home-popular h3 {
+  margin: auto;
+  margin-bottom: 25px;
+  font-size: 30px;
+}
+
+.slider {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 1000px;
+  position: relative;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+li {
+  width: fit-content;
+  height: fit-content;
+}
+
+li img {
+  border-radius: 5% / 3%;
+  border: 1px solid var(--main-background);
+  position: relative;
+}
+
+.slider-prev,
+.slider-next {
+  height: fit-content;
+  background-color: inherit;
+  font-size: 30px;
+  margin: auto;
+  cursor: pointer;
+  font-weight: 600;
+  position: absolute;
+  top: 160px;
+}
+
+.slider-prev {
+  left: 40px;
+}
+
+.slider-next {
+  left: 670px;
+}
+
+.slider-prev::before {
+  content: '<';
+  margin-right: 15px;
+}
+
+.slider-next::before {
+  content: '>';
+  margin-left: 15px;
+}
+
+.description {
+  position: relative;
+  top: 350px;
+}
+
+.description h4 {
+  display: none;
+}
+
+.further-description {
+  position: relative;
+  top: 350px;
+  left: 170px;
+}
+
+.further-description p {
+  text-transform: capitalize;
+  display: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  width: 55%;
+  text-align: center;
+  text-transform: none;
+}
+
+p.active {
+  display: block;
+}
+
+h4.active {
+  display: block !important;
+}
+
+.item {
+  flex: 1 0 20%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s ease-in-out;
+}
+
+.small1,
+.small2 {
+  height: 200px;
+  position: absolute;
+  z-index: -1;
+  top: 70px;
+}
+
+.big1,
+.big2 {
+  height: 250px;
+  position: absolute;
+  z-index: 0;
+  top: 40px;
+}
+
+.small1 {
+  left: 90px;
+}
+
+.big1 {
+  left: 170px;
+}
+
+.focus {
+  position: absolute;
+  z-index: 1;
+  height: 300px;
+  left: 270px;
+  top: 10px;
+}
+
+.big2 {
+  left: 400px;
+}
+
+.small2 {
+  left: 520px;
+}
 
 // HOME NEXT EVENTS
 .events-cards-grid {
@@ -11,7 +166,7 @@
   padding: 20px 70px 30px 70px;
 }
 
-.next-event-heading {
+.home-sub-heading, .carousel-sub-heading {
   text-align: center;
 }
 
