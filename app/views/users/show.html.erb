@@ -1,42 +1,41 @@
-<!-- Adicionar amigo -->
-<form action="/users/:user_id/friends(@user, @friend)" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <label for="first_name">First Name:</label>
-  <input type="first_name" name="first_name" required>
-  <label for="last_name">Last Name:</label>
-  <input type="last_name" name="last_name" required>
-  <input type="submit" value="Add a Friend">
-</form>
+<div class="container">
+  <%= simple_form_for [@user, @friend] do |f| %>
+        <%# <%= f.input :first_name %>
+        <%= f.association :receiver, collection: User.where.not(id: current_user.id), label_method: :full_name %>
+          <%= f.submit 'Create', class: "btn btn-primary" %>
+      <% end %>
 
-<%= simple_form_for [@user, @friend] do |f| %>
-      <%# <%= f.input :first_name %>
-      <%= f.association :receiver, label_method: :full_name %>
-        <%= f.submit 'Create', class: "btn btn-primary" %>
-    <% end %>
-
-<!-- Mostrar todos os amigos -->
-<h2>Your Friends</h2>
-<ul>
-  <% @friends.each do |friend| %>
-    <li><% if friend.confirmed == true %>
-          <%if friend.asker_id != current_user.id %>
-            <% @user = User.find(friend.asker_id) %>
-            <%= image_tag @user.profile_img, class: "avatar-large" %>
-          <% else %>
-            <% @user = User.find(friend.receiver_id) %>
-            <%= image_tag @user.profile_img, class: "avatar-large" %>
+  <!-- Mostrar todos os amigos -->
+  <h2>Your Friends</h2>
+  <ul>
+    <% @friends.each do |friend| %>
+      <li><% if friend.confirmed == true %>
+            <%if friend.asker_id != current_user.id %>
+              <% @user = User.find(friend.asker_id) %>
+              <%= image_tag @user.profile_img, class: "avatar-large" %>
+              <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+              <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+            <% else %>
+              <% @user = User.find(friend.receiver_id) %>
+              <%= image_tag @user.profile_img, class: "avatar-large" %>
+              <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+              <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+            <% end %>
           <% end %>
-        <% end %>
-    </li>
-  <% end %>
-</ul>
-<h2>Your Requests</h2>
-<ul>
-  <% @friends.each do |friend| %>
-    <li><%if friend.asker_id != current_user.id && friend.confirmed == false %>
-            <% @user = User.find(friend.asker_id) %>
-            <%= image_tag @user.profile_img, class: "avatar-large" %>
-        <% end %>
-    </li>
-  <% end %>
-</ul>
+      </li>
+    <% end %>
+  </ul>
+  <h2>Your Requests</h2>
+  <ul>
+    <% @friends.each do |friend| %>
+      <li><%if friend.asker_id != current_user.id && friend.confirmed == false %>
+              <% @user = User.find(friend.asker_id) %>
+              <%= image_tag @user.profile_img, class: "avatar-large" %>
+              <%= @user.full_name %>
+              <%= button_to "accept this friendship", [current_user, friend], method: 'patch'  %>
+          <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+</div>
