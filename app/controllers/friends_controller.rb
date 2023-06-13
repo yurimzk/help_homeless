@@ -5,8 +5,30 @@ class FriendsController < ApplicationController
 
   def create
     @asker_id = current_user
-    @receiver_id = User.find(friend_params[:receiver_id].to_i) ###### TESTAR ######
-    @friend = Friend.new!(asker: @asker_id, receiver: @receiver_id)
+    @receiver_id = User.find(friend_params[:receiver_id].to_i)
+    @friend = Friend.new(asker: @asker_id, receiver: @receiver_id)
+    if Friend.reacted?(@friend.asker_id, @friend.receiver_id) == false && Friend.confirmed_record?(@friend.asker_id, @friend.receiver_id) == false
+      @friend.save
+      redirect_to user_path(current_user)
+      flash.alert = "Invitation sent!"
+    else
+      flash.alert = "There is an invitation already!"
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def destroy
+    @friend = Friend.find(params[:id])
+    @friend.destroy
+    redirect_to user_path(current_user)
+  end
+
+  def update
+    @user = User.find(params[:user_id])
+    @friend = Friend.find(params[:id])
+    @friend.confirmed = true
+    @friend.save
+    redirect_to user_path(current_user)
   end
 
   private
@@ -15,12 +37,4 @@ class FriendsController < ApplicationController
     params.require(:friend).permit(:first_name, :last_name, :receiver_id)
   end
   ################################ DEIXAR PRA DEPOIS ###################################
-  # def destroy
-  #   if receiver_id == current_user
-  #     @friend = Friend.where(receiver_id: current_user)
-  #   else
-  #     @friend = Friend.where(asker_id: current_user)
-  #   end
-  #   @friend.destroy
-  # end
 end
