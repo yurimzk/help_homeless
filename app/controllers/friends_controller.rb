@@ -9,6 +9,7 @@ class FriendsController < ApplicationController
     @friend = Friend.new(asker: @asker_id, receiver: @receiver_id)
     if Friend.reacted?(@friend.asker_id, @friend.receiver_id) == false && Friend.confirmed_record?(@friend.asker_id, @friend.receiver_id) == false
       @friend.save
+      Chatroom.create(friend_id: @friend.id)
       redirect_to user_path(current_user)
       flash.alert = "Invitation sent!"
     else
