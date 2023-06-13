@@ -18,8 +18,8 @@ export default class extends Controller {
       center: [this.userLocationValue.lng, this.userLocationValue.lat], // starting position [lng, lat]
       zoom: 11,
     })
-    this.#addUserMarkersToMap()
     this.#addMarkersToMap()
+    this.#addUserMarkersToMap()
     // this.#fitMapToMarkers()
 
   }
