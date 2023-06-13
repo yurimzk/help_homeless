@@ -4,6 +4,9 @@ class Friend < ApplicationRecord
 
   # validates :asker_id, uniqueness: { scope: :receiver_id, message: "There is an invitation already!" }
 
+   def receivers_list
+    @friends = User.where.not(id: current_user.id)
+   end
   def self.reacted?(id1, id2)
     case1 = !Friend.where(asker_id: id1, receiver_id: id2).empty?
     case2 = !Friend.where(asker_id: id2, receiver_id: id1).empty?

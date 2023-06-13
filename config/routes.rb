@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "users#landing"
   get "/my_events", to: "users#home", as: :my_events
   resources :users, only: %i[show update edit] do
-    resources :friends, only: %i[index create destroy]
+    resources :friends, only: %i[index create update]
   end
   resources :chatrooms, only: %i[show create] do
     resources :messages, only: %i[create]
@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :comments, only: :destroy
   resources :participants, only: :destroy
   resources :likes, only: %i[create destroy]
+  resources :friends, only: %i[destroy]
 end
