@@ -14,12 +14,16 @@
               <% @user = User.find(friend.asker_id) %>
               <%= image_tag @user.profile_img, class: "avatar-large" %>
               <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-              <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+              <% if Chatroom.find_by(friend_id: friend.id) != nil %>
+                <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+              <% end %>
             <% else %>
               <% @user = User.find(friend.receiver_id) %>
               <%= image_tag @user.profile_img, class: "avatar-large" %>
               <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-              <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+              <% if Chatroom.find_by(friend_id: friend.id) != nil %>
+                <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+              <% end %>
             <% end %>
           <% end %>
       </li>
