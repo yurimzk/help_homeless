@@ -34,63 +34,69 @@
               <ul id="comments-list" class="comments-list">
                 <li>
                   <% @posts.each do |post| %>
-                  <div class="comment-main-level">
-                    <div class="comment-avatar">
-                        <%= image_tag post.user.profile_img %>
-                    </div>
-                    <div class="comment-box" data-controller="comments">
-                      <div class="comment-head">
-                        <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
-                        <span><%= post.created_at %></span>
-                        <i class="fa-solid fa-comment" data-action="click->comments#toggle"></i>
-                        <i>
-                          <% like = current_user.likes.find_by(post: post) %>
-                          <% if like.nil? %>
-                            <%= button_to likes_path,
-                                          params: { like: { post_id: post.id } },
-                                          style:"border: none; background: none; width: 16px;",
-                                          method: :post do %>
-                              <i class="fa-solid fa-hand-peace"></i>
-                            <% end %>
-                          <% else %>
-                            <%= button_to like_path(like),
-                                          style:"border: none; background: none; width: 16px;",
-                                          method: :delete do %>
-                              <i class="fa-solid fa-hand-peace" style="color: #ff0000;"></i>
-                            <% end %>
-                          <% end %>
-                        </i>
-                        <i><%= post.likes.count %></i>
-                      </div>
-                      <div class="comment-content">
-                        <%= post.content %>
-                      </div>
-                        <div data-comments-target="form" class="d-none">
-                          <%= simple_form_for [post, @comment] do |f| %>
-                            <%= f.input :content %>
-                            <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
-                          <% end %>
+                    <div data-controller="comments">
+                      <div class="comment-main-level">
+                        <div class="comment-avatar">
+                            <%= image_tag post.user.profile_img %>
                         </div>
+                        <div class="comment-box">
+                          <div class="comment-head">
+                            <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
+                            <span><%= (Date.today - post.created_at.to_date).to_i  %> days ago</span>
+                            <i class="fa-solid fa-comment" data-action="click->comments#toggle"></i>
+                            <i>
+                              <% like = current_user.likes.find_by(post: post) %>
+                              <% if like.nil? %>
+                                <%= button_to likes_path,
+                                              params: { like: { post_id: post.id } },
+                                              style:"border: none; background: none; width: 16px;",
+                                              remote: true,
+                                              method: :post do %>
+                                  <i class="fa-solid fa-hand-peace"></i>
+                                <% end %>
+                              <% else %>
+                                <%= button_to like_path(like),
+                                              style:"border: none; background: none; width: 16px;",
+                                              method: :delete do %>
+                                  <i class="fa-solid fa-hand-peace" style="color: #ff0000;"></i>
+                                <% end %>
+                              <% end %>
+                            </i>
+                            <i><%= post.likes.count %></i>
+                          </div>
+                          <div class="comment-content">
+                            <%= post.content %>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="comments-list reply-list">
+                          <% post.comments.each do |comment| %>
+                            <li>
+                              <div class="comment-avatar">
+                                  <%= image_tag comment.user.profile_img %>
+                              </div>
+                              <div class="comment-box">
+                                <div class="comment-head">
+                                  <h6 class="comment-name">
+                                    <%= comment.user.first_name %> <%= comment.user.last_name %>
+                                    <span class="float-none mx-2">
+                                      <%= (Date.today - comment.created_at.to_date).to_i %> days ago
+                                    </span>
+                                </div>
+                                <div class="comment-content">
+                                  <%= comment.content %>
+                                </div>
+                              </div>
+                          <% end %>
+                            <div data-comments-target="form" class="d-none">
+                              <%= simple_form_for [post, @comment] do |f| %>
+                                <%= f.input :content %>
+                                <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+                              <% end %>
+                            </div>
+                            </li>
+                      </ul>
                     </div>
-                  </div>
-                  <ul class="comments-list reply-list">
-                      <% post.comments.each do |comment| %>
-                        <li>
-                          <div class="comment-avatar">
-                              <%= image_tag comment.user.profile_img %>
-                          </div>
-                          <div class="comment-box">
-                            <div class="comment-head">
-                              <h6 class="comment-name">
-                                <%= comment.user.first_name %> <%= comment.user.last_name %> <%= comment.created_at %>
-                            </div>
-                            <div class="comment-content">
-                              <%= comment.content %>
-                            </div>
-                          </div>
-                      <% end %>
-                        </li>
-                  </ul>
                   <% end %>
                 </li>
               </ul>
