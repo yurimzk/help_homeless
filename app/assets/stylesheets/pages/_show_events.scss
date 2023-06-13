@@ -18,6 +18,9 @@
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 0 10px;
+  .card {
+    height: 150px;
+  }
 }
 #map {
   height: 730px;
