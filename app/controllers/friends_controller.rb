@@ -10,12 +10,13 @@ class FriendsController < ApplicationController
     if Friend.reacted?(@friend.asker_id, @friend.receiver_id) == false && Friend.confirmed_record?(@friend.asker_id, @friend.receiver_id) == false
       @friend.save
       Chatroom.create(friend_id: @friend.id)
-      redirect_to user_path(current_user)
       flash.alert = "Invitation sent!"
+    elsif @friend.valid? == false && Friend.confirmed_record?(@friend.asker_id, @friend.receiver_id) == false
+      flash.alert = "There is an invitation already sent!"
     else
-      flash.alert = "There is an invitation already!"
-      redirect_to user_path(current_user)
+      flash.alert = "You are already a friend!"
     end
+    redirect_to user_path(current_user)
   end
 
   def destroy
