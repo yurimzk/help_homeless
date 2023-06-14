@@ -1,24 +1,37 @@
-<% if @friend.asker_id == current_user.id || @friend.receiver_id == current_user.id %>
-  <div class="chatroom" style="height: 89.5vh;" data-controller="chatroom-subscription"
-  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
-    <h1><% @chatroom.id%></h1>
+<div class="chat-grid">
+  <div></div>
+  <div class="box chatroom"
+    data-controller="chatroom-subscription"
+    data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+    data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
+    <% if @friend.asker_id == current_user.id || @friend.receiver_id == current_user.id %>
+      <div class="chatroom" style="height: 89.5vh;" data-controller="chatroom-subscription"
+      data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+        <h1><% @chatroom.id%></h1>
 
-    <div class="messages" data-chatroom-subscription-target="messages">
-      <% @chatroom.messages.each do |message| %>
-        <%= render "messages/message", message: message %>
-      <% end %>
-    </div>
-
-  <%= simple_form_for [@chatroom, @message],
-  html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }, class: "d-flex" } do |f|
-%>
-    <%= f.input :content,
-      label: false,
-      placeholder: "Message ##{@chatroom.id}",
-      wrapper_html: {class: "flex-grow-1"}
+        <div class="messages" data-chatroom-subscription-target="messages">
+          <% @chatroom.messages.each do |message| %>
+            <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+              <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+                <%= render "messages/message", message: message %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%= simple_form_for [@chatroom, @message],
+      html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm", target: "submit" }, class: "d-flex" } do |f|
     %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-  <% end %>
-<% else %>
-  <p>You don't have the permission for this page!!!!</p>
-<% end %>
+        <%= f.input :content,
+          label: false,
+          placeholder: " Type your message",
+          wrapper_html: {class: "flex-grow-1"}
+        %>
+        <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+      <% end %>
+    <% else %>
+      <p>You don't have the permission for this page!!!!</p>
+    <% end %>
+  </div>
+  <div></div>
+</div>

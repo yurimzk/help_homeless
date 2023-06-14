@@ -1,0 +1,20 @@
+.message-row {
+  padding: 8px;
+}
+
+// To style the message itself
+.sender-style, .receiver-style {
+  width: 70%;
+  max-width: 400px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.sender-style {
+  background-color: lightcoral;
+  text-align: end;
+}
+
+.receiver-style {
+  background-color: lightblue;
+}
