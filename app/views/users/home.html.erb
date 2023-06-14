@@ -1,33 +1,24 @@
-<%= link_to "Events List", events_path, class:"btn btn-primary"%>
-
-<div class="user-home-page d-flex flex-column">
+<div class="user-home-page d-flex flex-column mt-4">
   <%# SUGGESTED EVENTS CAROUSEL %>
-  <div class="home">
-    <div class="home-popular">
-      <h3>Events near you</h3>
-
-      <div class="slider">
-        <div class="slider-prev"></div>
-        <% @events_location.each_with_index do |event, index| %>
-          <ul class="carousel-ul">
-            <li class="carousel-event-list">
-              <% if index == 0 %>
-                <img class="item small1" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
-              <% elsif index == 1 %>
-                <img class="item big1" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
-              <% elsif index == 2 %>
-                <img class="item focus" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
-              <% elsif index == 3 %>
-                <img class="item big2" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
-              <% elsif index == 4 %>
-                <img class="item small2" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
-              <% end %>
-            </li>
-          </ul>
-        <% end %>
-        <div class="slider-next"></div>
-      </div>
+  <h2 class="d-flex justify-content-center"> Events near you </h2>
+  <div class="carousel d-flex justify-content-center">
+    <div class="carousel-cards">
+      <% @events_location.each do |event| %>
+          <div class="card"><%= link_to event_path(event) do %>
+            <h3 class="title"><%= event.title %></h3>
+              <div class="card-image" style="background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8)), url('<%=event.event_img%>');
+                          background-size: cover;
+                          width: 100%;
+                          background-position: center;">
+              </div>
+            <% end %>
+          </div>
+      <% end %>
     </div>
+  </div>
+
+  <div class="centered-container">
+    <%= link_to "See more events", events_path, class: "event-list-link" %>
   </div>
 
   <%# NEXT EVENTS CARDS %>
@@ -39,7 +30,7 @@
                   .each do |event| %>
         <%= link_to event_path(event) do %>
           <div class="next-event-card">
-            <img src="<%=event.event_img%>" alt="" class="card-img">
+            <div class="card-img" style="background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8)), url('<%=event.event_img%>')"></div>
             <div class="card-info">
               <h4><strong><%= event.title %></strong></h4>
               <h5><%= event.event_date.strftime("%B ") + event.event_date.day.ordinalize %></h5>
