@@ -77,39 +77,6 @@ li img {
   margin-left: 15px;
 }
 
-.description {
-  position: relative;
-  top: 350px;
-}
-
-.description h4 {
-  display: none;
-}
-
-.further-description {
-  position: relative;
-  top: 350px;
-  left: 170px;
-}
-
-.further-description p {
-  text-transform: capitalize;
-  display: none;
-  font-size: 1.2rem;
-  font-weight: 400;
-  width: 55%;
-  text-align: center;
-  text-transform: none;
-}
-
-p.active {
-  display: block;
-}
-
-h4.active {
-  display: block !important;
-}
-
 .item {
   flex: 1 0 20%;
   height: 100%;
@@ -158,6 +125,10 @@ h4.active {
 }
 
 // HOME NEXT EVENTS
+.next-events {
+  margin-top: 200px;
+}
+
 .events-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -8,29 +8,24 @@
 
       <div class="slider">
         <div class="slider-prev"></div>
-
-          <% @events_location.each do |event| %>
-            <ul class="carousel-ul">
-              <li class="carousel-event-list">
-              <%# Make if / else %>
-                <img class="item" src="<%=event.event_img%>" alt="">
-              </li>
-            </ul>
-
-            <div class="description">
-            <%# Make if / else %>
-              <h4><strong><%= event.title %></strong></h4>
-              <h4><%= event.event_date.strftime("%B ") + event.event_date.day.ordinalize %></h4>
-            </div>
-
-            <div class="further-description">
-            <%# Make if / else %>
-              <p><%= event.description %></p>
-            </div>
-          <% end %>
-
+        <% @events_location.each_with_index do |event, index| %>
+          <ul class="carousel-ul">
+            <li class="carousel-event-list">
+              <% if index == 0 %>
+                <img class="item small1" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
+              <% elsif index == 1 %>
+                <img class="item big1" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
+              <% elsif index == 2 %>
+                <img class="item focus" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
+              <% elsif index == 3 %>
+                <img class="item big2" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
+              <% elsif index == 4 %>
+                <img class="item small2" style="order: <%= index %>;" src="<%= event.event_img %>" alt="">
+              <% end %>
+            </li>
+          </ul>
+        <% end %>
         <div class="slider-next"></div>
-
       </div>
     </div>
   </div>
