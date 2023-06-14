@@ -1,29 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "like"]
-  static values = {
-    post: Number
-  }
+  static targets = ["form", "commentary"]
 
   toggle(){
     this.formTarget.classList.toggle("d-none")
   }
 
-  connect(){
-    console.log(this.postValue)
-  }
+  submitForm(event) {
+    event.preventDefault();
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
 
-  refresh(event){
-    event.preventDefault()
-    const url = "http://localhost:3000/likes"
-    fetch(url, {
-      method: "POST",
-      headers: {"Accept": "text/plain"}})
-    .then(response => response.text())
-    .then((data) => {
-      console.log(event.currentTarget)
+    // Perform form submission using AJAX
+    fetch(formElement.action, {
+      method: formElement.method,
+      body: formData
     })
+      .then(response => response.text())
+      .then(html => {
+        // Update the commentary target with the response HTML
+        this.commentaryTarget.innerHTML = html;
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
   }
 
 }

@@ -45,7 +45,8 @@
                             <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
                       <% end %>
                             <span><%= (Date.today - post.created_at.to_date).to_i  %> days ago</span>
-                            <i class="fa-solid fa-comment" data-action="click->comments#toggle"></i>
+                            <i class="fa-solid fa-comment fa-xl" style="top: 14px; right: 5px;" data-action="click->comments#toggle">
+                            </i>
                             <i>
                               <% like = current_user.likes.find_by(post: post) %>
                               <% if like.nil? %>
@@ -54,17 +55,17 @@
                                               style:"border: none; background: none; width: 16px;",
                                               remote: true,
                                               method: :post do %>
-                                  <i class="fa-solid fa-hand-peace"></i>
+                                  <i class="fa-solid fa-hand-peace fa-xl" style="top: -4px;"></i>
                                 <% end %>
                               <% else %>
                                 <%= button_to like_path(like),
                                               style:"border: none; background: none; width: 16px;",
                                               method: :delete do %>
-                                  <i class="fa-solid fa-hand-peace" style="color: #ff0000;"></i>
+                                  <i class="fa-solid fa-hand-peace fa-xl" style="color: #ff0000; top: -4px;"></i>
                                 <% end %>
                               <% end %>
                             </i>
-                            <i><%= post.likes.count %></i>
+                            <i style="right: 8px;top: 5px;"><%= post.likes.count %></i>
                           </div>
                           <div class="comment-content">
                             <%= post.content %>
@@ -93,9 +94,9 @@
                               </div>
                           <% end %>
                             <div data-comments-target="form" class="d-none">
-                              <%= simple_form_for [post, @comment] do |f| %>
+                              <%= simple_form_for [post, @comment], remote: true, data: { controller: "comments" } do |f| %>
                                 <%= f.input :content %>
-                                <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+                                <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3", data: { target: "comments.commentary" } %>
                               <% end %>
                             </div>
                             </li>
