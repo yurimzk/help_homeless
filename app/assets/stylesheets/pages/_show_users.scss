@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
+
+.snip1336 {
+  font-family: 'Roboto', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 230px;
+  max-width: 380px;
+  width: 100%;
+  color: #ffffff;
+  line-height: 1em;
+  background-color: #141414;
+  height: 76.6vh;
+}
+.snip1336 img {
+  max-width: 100%;
+  vertical-align: top;
+  opacity: 0.85;
+}
+.snip1336 figcaption {
+  width: 100%;
+  background-color: #141414;
+  padding: 25px;
+  position: relative;
+}
+.snip1336 .profile {
+  border-radius: 50%;
+  bottom: 100%;
+  left: 99px;
+  bottom: 245px;
+  border: 2px solid #000;
+  z-index: 1;
+  max-width: 180px;
+  opacity: 1;
+  position: absolute;
+}
+.snip1336 .addfriend {
+  margin-right: 4%;
+  border-color: #2980b9;
+  color: #2980b9;
+}
+.info {
+  margin-top: 215px;
+  font-weight: 300;
+}
+.snip1336 p {
+  margin: 0 0;
+  font-size: .9em;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  line-height: 20px;
+}
