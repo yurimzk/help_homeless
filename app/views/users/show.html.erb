@@ -1,9 +1,9 @@
 <% if @user == current_user %>
   <div class="profile-card d-flex justify-content-center">
     <div class="snip1336">
-      <img class="card-banner" src="<%= @event.event_img %>" alt="sample87" />
+      <%=cl_image_tag @event.photo.key, class: "card-banner"%>
       <figcaption>
-        <img src="<%= current_user.profile_img %>" alt="profile-sample4" class="profile" />
+        <img><%=cl_image_tag @user.avatar.key, class: "profile"%><img>
         <div class="info">
           <h2><%= current_user.first_name %> <%=  current_user.last_name %></h2>
           <div class="friend-interaction">
@@ -16,9 +16,9 @@
 <% else %>
   <div class="profile-card d-flex justify-content-center">
     <div class="snip1336">
-      <img class="card-banner" src="<%= @event.event_img %>" alt="sample87" />
+      <%=cl_image_tag @event.photo.key, class: "card-banner"%>
       <figcaption>
-        <img src="<%= @user.profile_img %>" alt="profile-sample4" class="profile" />
+        <img><%=cl_image_tag @user.avatar.key, class: "profile"%><img>
         <div class="info">
           <h2><%= @user.first_name %> <%=  @user.last_name %></h2>
           <div class="friend-interaction">

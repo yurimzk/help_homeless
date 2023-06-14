@@ -12,14 +12,14 @@
       <li><% if friend.confirmed == true %>
             <%if friend.asker_id != current_user.id %>
               <% @user = User.find(friend.asker_id) %>
-              <%= image_tag @user.profile_img, class: "avatar-large" %>
+              <%= cl_image_tag @user.avatar.key, class: "avatar-large" %>
               <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
               <% if Chatroom.find_by(friend_id: friend.id) != nil %>
                 <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
               <% end %>
             <% else %>
               <% @user = User.find(friend.receiver_id) %>
-              <%= image_tag @user.profile_img, class: "avatar-large" %>
+              <%= cl_image_tag @user.avatar.key, class: "avatar-large" %>
               <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
               <% if Chatroom.find_by(friend_id: friend.id) != nil %>
                 <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
@@ -34,7 +34,7 @@
     <% @friends.each do |friend| %>
       <li><%if friend.asker_id != current_user.id && friend.confirmed == false %>
               <% @user = User.find(friend.asker_id) %>
-              <%= image_tag @user.profile_img, class: "avatar-large" %>
+              <%= cl_image_tag @user.avatar.key, class: "avatar-large" %>
               <%= @user.full_name %>
               <%= button_to "accept this friendship", [current_user, friend], method: 'patch'  %>
           <% end %>
