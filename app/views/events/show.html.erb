@@ -1,7 +1,7 @@
 <div class="">
   <div class="event-show-display-grid p-5 border mx-5  justify-content-left mt-5">
     <div class="d-inline-flex align-items-center px-4">
-      <img src=<%=@event.event_img%> class="img-fluid" alt="...">
+      <img> <%= cl_image_tag @event.photo.key, class: "img-fluid"%> <img>
     </div>
     <div class=" event-show-display-text p-4">
       <h1><strong><%= @event.title %></strong></h1>
@@ -26,7 +26,7 @@
           <div class="card-body">
             <h2>Add a post</h2>
             <%= simple_form_for [@event, @post] do |f| %>
-              <%= f.input :content %>
+              <%= f.input :content, label: false %>
               <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
             <% end %>
             <h4>Posts</h4>
@@ -38,7 +38,7 @@
                       <div class="comment-main-level">
                       <%= link_to user_path(post.user_id) do %>
                         <div class="comment-avatar">
-                            <%= image_tag post.user.profile_img %>
+                            <%= cl_image_tag post.user.avatar.key, class: "avatar" %>
                         </div>
                         <div class="comment-box">
                           <div class="comment-head">
@@ -77,7 +77,7 @@
                             <li>
                               <div class="comment-avatar">
                                 <%= link_to user_path(comment.user_id) do %>
-                                  <%= image_tag comment.user.profile_img %>
+                                  <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
                               </div>
                               <div class="comment-box">
                                 <div class="comment-head">
@@ -94,9 +94,9 @@
                               </div>
                           <% end %>
                             <div data-comments-target="form" class="d-none">
-                              <%= simple_form_for [post, @comment], remote: true, data: { controller: "comments" } do |f| %>
-                                <%= f.input :content %>
-                                <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3", data: { target: "comments.commentary" } %>
+                              <%= simple_form_for [post, @comment] do |f| %>
+                                <%= f.input :content, label: "Write a comment", :required => false %>
+                                <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
                               <% end %>
                             </div>
                             </li>
@@ -116,7 +116,7 @@
             <div class="d-flex flex-column px-4 py-1 align-items-start">
             <%= link_to user_path(@event.user_id) do %>
               <p>
-                <%= image_tag @event.user.profile_img, class: "avatar-large mx-2" %> <%= @event.user.first_name %> <%= @event.user.last_name %>
+                <%= cl_image_tag @event.user.avatar.key, class: "avatar-large mx-2" %> <%= @event.user.first_name %> <%= @event.user.last_name %>
               </p>
             <% end %>
             </div>
@@ -127,7 +127,7 @@
                 <% @participants.each do |participant| %>
                 <%= link_to user_path(participant.user_id) do %>
                   <p>
-                  <%= image_tag participant.user.profile_img, class: "avatar-large mx-2" %> <%= participant.user.first_name %> <%= participant.user.last_name %>
+                  <%= cl_image_tag participant.user.avatar.key, class: "avatar-large mx-2" %> <%= participant.user.first_name %> <%= participant.user.last_name %>
                   </p>
                 <% end %>
                 <% end %>

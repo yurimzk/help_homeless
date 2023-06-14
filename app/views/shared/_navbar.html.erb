@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm color-comp navbar-lewagon">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "https://res.cloudinary.com/dtz9smyye/image/upload/v1686339738/FtLPAyz4_2x-removebg-preview_guuz4h.png" %>
+    <%= image_tag "https://res.cloudinary.com/dtz9smyye/image/upload/v1686775605/FtLPAyz4_2x-removebg-preview_e2slpi.png" %>
   <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
               </a>
             <% else %>
               <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= image_tag current_user.avatar.key, class: "avatar", alt: "dropdown menu" %>
+                <%= cl_image_tag current_user.avatar.key, class: "avatar" %>
               </a>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
