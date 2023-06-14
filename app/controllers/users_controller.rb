@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def show
     @friends = Friend.all
     @friend = Friend.new
+    @event = Event.find(@user.event_ids.first)
   end
 
   def landing
