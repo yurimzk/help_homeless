@@ -6,48 +6,102 @@
   overflow: hidden;
   margin: 10px;
   min-width: 230px;
-  max-width: 380px;
+  max-width: 420px;
   width: 100%;
   color: #ffffff;
   line-height: 1em;
-  background-color: #141414;
-  height: 76.6vh;
+  background-color: #000;
+  height: 81vh;
 }
+
 .snip1336 img {
   max-width: 100%;
   vertical-align: top;
   opacity: 0.85;
 }
+
+.snip1336 .card-banner{
+  height: 315px;
+  max-width: 100%;
+  vertical-align: top;
+  opacity: 0.85;
+}
+
 .snip1336 figcaption {
   width: 100%;
-  background-color: #141414;
+  background-color: #000;
   padding: 25px;
   position: relative;
 }
+
 .snip1336 .profile {
   border-radius: 50%;
   bottom: 100%;
-  left: 99px;
-  bottom: 245px;
-  border: 2px solid #000;
+  left: 118px;
+  bottom: 79%;
+  border: 1px solid #000;
   z-index: 1;
   max-width: 180px;
   opacity: 1;
   position: absolute;
 }
+
 .snip1336 .addfriend {
   margin-right: 4%;
   border-color: #2980b9;
   color: #2980b9;
 }
+
 .info {
-  margin-top: 215px;
+  margin-top: 125px;
   font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
-.snip1336 p {
-  margin: 0 0;
-  font-size: .9em;
-  letter-spacing: 1px;
-  opacity: 0.8;
-  line-height: 20px;
+
+  .info h2 {
+    align-self: center;
+    margin-bottom: 50%;
+  }
+
+  .friend-interaction p {
+    margin: 0 35px 12% 35px;
+    font-size: 1em;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    line-height: 24px;
+    position: absolute;
+    bottom: -60px;
+  }
+
+.friend-info {
+  margin-top: 125px;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.friend-interaction {
+  display: flex;
+  justify-content: center;
+}
+
+.friend-interaction a {
+  padding: 10px 15px;
+  background-color: #2980b9;
+  color: #f5f5f5;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.friend-interaction a.addfriend {
+  background-color: #2980b9;
+  color: #f5f5f5;
+}
+
+.friend-interaction a.chat {
+  background-color: #27ae60;
 }
