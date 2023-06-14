@@ -1,7 +1,7 @@
 .chatroom {
   background: white;
-  margin-top: 9px;
-  height: calc(100vh - 75px);
+  margin-bottom: -10px;
+  height: 76.5vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,9 +14,13 @@
   }
 
   .messages {
-    height: 100%;
+    height: 58vh;
     overflow: scroll;
     padding: 1rem;
+    p{
+      margin-bottom: 0;
+      font-size: small;
+    }
   }
 
   #new_message {
@@ -27,4 +31,9 @@
       margin-bottom: 0;
     }
   }
+}
+.chat-grid {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  height: 79.3vh;
 }
