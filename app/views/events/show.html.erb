@@ -36,12 +36,14 @@
                   <% @posts.each do |post| %>
                     <div data-controller="comments">
                       <div class="comment-main-level">
+                      <%= link_to user_path(post.user_id) do %>
                         <div class="comment-avatar">
                             <%= image_tag post.user.profile_img %>
                         </div>
                         <div class="comment-box">
                           <div class="comment-head">
                             <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
+                      <% end %>
                             <span><%= (Date.today - post.created_at.to_date).to_i  %> days ago</span>
                             <i class="fa-solid fa-comment" data-action="click->comments#toggle"></i>
                             <i>
@@ -73,12 +75,14 @@
                           <% post.comments.each do |comment| %>
                             <li>
                               <div class="comment-avatar">
+                                <%= link_to user_path(comment.user_id) do %>
                                   <%= image_tag comment.user.profile_img %>
                               </div>
                               <div class="comment-box">
                                 <div class="comment-head">
                                   <h6 class="comment-name">
                                     <%= comment.user.first_name %> <%= comment.user.last_name %>
+                                <% end %>
                                     <span class="float-none mx-2">
                                       <%= (Date.today - comment.created_at.to_date).to_i %> days ago
                                     </span>
@@ -109,18 +113,22 @@
           <div class="owner my-3">
             <h2>Owner</h2>
             <div class="d-flex flex-column px-4 py-1 align-items-start">
+            <%= link_to user_path(@event.user_id) do %>
               <p>
                 <%= image_tag @event.user.profile_img, class: "avatar-large mx-2" %> <%= @event.user.first_name %> <%= @event.user.last_name %>
               </p>
+            <% end %>
             </div>
           </div>
           <div class="helper">
             <h2 class="py-3">Helpers</h2>
               <div class="d-flex flex-column px-4 py-1 align-items-start">
                 <% @participants.each do |participant| %>
+                <%= link_to user_path(participant.user_id) do %>
                   <p>
                   <%= image_tag participant.user.profile_img, class: "avatar-large mx-2" %> <%= participant.user.first_name %> <%= participant.user.last_name %>
                   </p>
+                <% end %>
                 <% end %>
               </div>
           </div>
