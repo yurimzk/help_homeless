@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm color-comp navbar-lewagon">
+<div class="navbar navbar-expand-sm color-comp navbar-lewagon" data-controller="refresh">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "https://res.cloudinary.com/dtz9smyye/image/upload/v1686339738/FtLPAyz4_2x-removebg-preview_guuz4h.png" %>
@@ -8,14 +8,17 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <div data-refresh-target="search" class="d-none">
     <div class="row justify-content-center navbar_search">
       <%= form_with url: events_path, method: :get, class: "d-flex" do %>
         <%= text_field_tag :query, params[:query], class: "form-control"%>
         <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
       <% end %>
     </div>
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <i class="fa-solid fa-magnifying-glass fa-2xl mx-3 text-white" data-action="click->refresh#toggle"></i>
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">

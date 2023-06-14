@@ -9,22 +9,18 @@ export default class extends Controller {
 
   submitForm(event) {
     event.preventDefault();
-    const formElement = event.currentTarget;
-    const formData = new FormData(formElement);
-
-    // Perform form submission using AJAX
-    fetch(formElement.action, {
-      method: formElement.method,
-      body: formData
+    fetch(this.commentaryTarget.action, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(this.commentaryTarget)
     })
-      .then(response => response.text())
-      .then(html => {
-        // Update the commentary target with the response HTML
-        this.commentaryTarget.innerHTML = html;
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
+    .then(response => response.json())
+    .then((data) => {
+      if (data.inserted_item) {
+        this.itemsTarget.insertAdjacentHTML("beforeend", data.inserted_item)
+      }
+      this.formTarget.outerHTML = data.form
+    })
   }
 
 }
