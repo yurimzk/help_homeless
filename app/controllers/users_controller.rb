@@ -8,12 +8,13 @@ class UsersController < ApplicationController
     @participants.each do |participant|
       @events_home << Event.find(participant.event_id)
     end
-    @events_location = Event.near([current_user.latitude, current_user.longitude], 30).limit(5)
+    @events_location = Event.near([current_user.latitude, current_user.longitude], 200).limit(5)
   end
 
   def show
     @friends = Friend.all
     @friend = Friend.new
+    @event = Event.find(@user.event_ids.first)
   end
 
   def landing

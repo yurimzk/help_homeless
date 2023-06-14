@@ -36,14 +36,17 @@
                   <% @posts.each do |post| %>
                     <div data-controller="comments">
                       <div class="comment-main-level">
+                      <%= link_to user_path(post.user_id) do %>
                         <div class="comment-avatar">
                             <%= cl_image_tag post.user.avatar.key, class: "avatar" %>
                         </div>
                         <div class="comment-box">
                           <div class="comment-head">
                             <h6 class="comment-name by-author"><%= post.user.first_name %> <%= post.user.last_name %></h6>
+                      <% end %>
                             <span><%= (Date.today - post.created_at.to_date).to_i  %> days ago</span>
-                            <i class="fa-solid fa-comment" data-action="click->comments#toggle"></i>
+                            <i class="fa-solid fa-comment fa-xl" style="top: 14px; right: 5px;" data-action="click->comments#toggle">
+                            </i>
                             <i>
                               <% like = current_user.likes.find_by(post: post) %>
                               <% if like.nil? %>
@@ -52,17 +55,17 @@
                                               style:"border: none; background: none; width: 16px;",
                                               remote: true,
                                               method: :post do %>
-                                  <i class="fa-solid fa-hand-peace"></i>
+                                  <i class="fa-solid fa-hand-peace fa-xl" style="top: -4px;"></i>
                                 <% end %>
                               <% else %>
                                 <%= button_to like_path(like),
                                               style:"border: none; background: none; width: 16px;",
                                               method: :delete do %>
-                                  <i class="fa-solid fa-hand-peace" style="color: #ff0000;"></i>
+                                  <i class="fa-solid fa-hand-peace fa-xl" style="color: #ff0000; top: -4px;"></i>
                                 <% end %>
                               <% end %>
                             </i>
-                            <i><%= post.likes.count %></i>
+                            <i style="right: 8px;top: 5px;"><%= post.likes.count %></i>
                           </div>
                           <div class="comment-content">
                             <%= post.content %>
@@ -73,12 +76,14 @@
                           <% post.comments.each do |comment| %>
                             <li>
                               <div class="comment-avatar">
-                                <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
+                                <%= link_to user_path(comment.user_id) do %>
+                                  <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
                               </div>
                               <div class="comment-box">
                                 <div class="comment-head">
                                   <h6 class="comment-name">
                                     <%= comment.user.first_name %> <%= comment.user.last_name %>
+                                <% end %>
                                     <span class="float-none mx-2">
                                       <%= (Date.today - comment.created_at.to_date).to_i %> days ago
                                     </span>
@@ -109,18 +114,22 @@
           <div class="owner my-3">
             <h2>Owner</h2>
             <div class="d-flex flex-column px-4 py-1 align-items-start">
+            <%= link_to user_path(@event.user_id) do %>
               <p>
                 <%= cl_image_tag @event.user.avatar.key, class: "avatar-large mx-2" %> <%= @event.user.first_name %> <%= @event.user.last_name %>
               </p>
+            <% end %>
             </div>
           </div>
           <div class="helper">
             <h2 class="py-3">Helpers</h2>
               <div class="d-flex flex-column px-4 py-1 align-items-start">
                 <% @participants.each do |participant| %>
+                <%= link_to user_path(participant.user_id) do %>
                   <p>
                   <%= cl_image_tag participant.user.avatar.key, class: "avatar-large mx-2" %> <%= participant.user.first_name %> <%= participant.user.last_name %>
                   </p>
+                <% end %>
                 <% end %>
               </div>
           </div>

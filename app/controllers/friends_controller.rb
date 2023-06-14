@@ -1,6 +1,8 @@
 class FriendsController < ApplicationController
   def index
-    @friends = Friends.all
+    @friends = Friend.all
+    @user = current_user
+    @friend = Friend.new
   end
 
   def create
