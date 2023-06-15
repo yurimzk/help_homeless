@@ -1,13 +1,14 @@
 <div class="">
-  <div class="event-show-display-grid p-5 border mx-5  justify-content-left mt-5">
+  <div class="event-show-display-grid p-5 mx-5  justify-content-left mt-5">
     <div class="d-inline-flex align-items-center px-4">
       <img> <%= cl_image_tag @event.photo.key, class: "img-fluid"%> <img>
     </div>
     <div class=" event-show-display-text p-4">
-      <h1><strong><%= @event.title %></strong></h1>
+      <h1 class="mb-4"><strong><%= @event.title %></strong></h1>
       <h4><%= @event.description %></h4>
       <br>
-      <h4><strong>Event date:</strong> <%= @event.event_date %></h4>
+      <h4 class="my-3"><strong>Event date:</strong> <%= @event.event_date.strftime("%B ") + @event.event_date.day.ordinalize + @event.event_date.strftime(" %Y") %></h4>
+      <h4 class="my-4"><strong>Address:</strong> <%= @event.address %></h4>
       <% if @event.user_id != current_user.id %>
         <% if !@participantdestroy.nil? %>
             <%= link_to "Leave Event", participant_path(@participantdestroy), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger border-0 my-3 rounded-3 text-white" %>
@@ -19,7 +20,7 @@
       <% end %>
     </div>
   </div>
-  <div class="p-5 border mx-5">
+  <div class="p-5 mx-5">
     <div class="row">
       <div class="col-8">
         <div class="card">

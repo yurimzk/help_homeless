@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: $color-comp;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -13,4 +13,8 @@
 
 .navbar-search {
   width: 500px;
+}
+
+.dropdown-menu {
+  background-color: #dddee0;
 }
