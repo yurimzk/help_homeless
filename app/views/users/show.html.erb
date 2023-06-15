@@ -22,8 +22,8 @@
               <i class="fa-solid fa-user-minus fa-xl text-danger delete-friend"></i>
             <% end %>
           <% else %>
-            <%= button_to user_friends_add_path(params[:id]), method: :post do%>
-              <i class="addfriend fa-solid fa-user-plus fa-xl"></i>
+            <%= button_to user_friends_add_path(params[:id]), class: "addfriend", method: :post do%>
+              <i class="addfriend fa-solid fa-user-plus fa-2xl" style="color: #3ade0d;"></i>
             <% end %>
           <% end %>
         </div>

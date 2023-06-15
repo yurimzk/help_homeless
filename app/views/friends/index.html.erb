@@ -39,21 +39,26 @@
         </ul>
     </div>
   </div>
-  <div class="bg-friend-list-cards">
+  <div class="bg-friend-list-requests">
     <h2 class= "text-center my-3">My Requests</h2>
-      <ul>
+      <ul class="list-request">
         <% @friends.each do |friend| %>
-          <li>
+          <li class="d-flex flex-row">
             <% if friend.confirmed == false %>
-              <%if friend.asker_id == current_user.id %>
+              <% if friend.asker_id == current_user.id %>
                 <% @user = User.find(friend.receiver_id) %>
-                <%= cl_image_tag @user.avatar.key, class: "avatar-large" %>
-                <%= @user.full_name %>
+                <%= cl_image_tag @user.avatar.key, class: "avatar-friend" %>
+                <p class="friend-name"><%= @user.full_name %></p>
               <% elsif friend.receiver_id == current_user.id  %>
                 <% @user = User.find(friend.asker_id) %>
-                <%= cl_image_tag @user.avatar.key, class: "avatar-large" %>
-                <%= @user.full_name %>
-                <%= button_to "accept this friendship", [current_user, friend], method: 'patch'  %>
+                <%= cl_image_tag @user.avatar.key, class: "avatar-friend" %>
+                <p class="friend-name"><%= @user.full_name %></p>
+                <%= button_to [current_user, friend], class: "bg-check", method: 'patch' do %>
+                  <i class="addfriend fa-solid fa-check fa-2xl" style="color: #3ade0d;"></i>
+                <% end %>
+                <%= link_to friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do  %>
+                  <i class="fa-solid fa-ban delete-request fa-2xl" style="color: #d31212;"></i>
+                <% end %>
               <% end %>
             <% end %>
           </li>
