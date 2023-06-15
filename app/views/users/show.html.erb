@@ -2,31 +2,32 @@
   <div class="profile-card d-flex justify-content-center">
     <div class="snip1336">
       <%=cl_image_tag @event.photo.key, class: "card-banner"%>
-      <figcaption>
-        <img><%=cl_image_tag @user.avatar.key, class: "profile"%><img>
-        <div class="info">
-          <h2><%= current_user.first_name %> <%=  current_user.last_name %></h2>
-          <div class="friend-interaction">
-            <p>Address: <%= current_user.address %></p>
-          </div>
-        </div>
-      </figcaption>
+      <img><%=cl_image_tag @user.avatar.key, class: "profile"%><img>
+      <div class="profile-info">
+        <h2 class="profile-name" ><%= current_user.first_name %> <%=  current_user.last_name %></h2>
+        <p class="address">Address: <%= current_user.address %></p>
+      </div>
     </div>
   </div>
 <% else %>
   <div class="profile-card d-flex justify-content-center">
     <div class="snip1336">
       <%=cl_image_tag @event.photo.key, class: "card-banner"%>
-      <figcaption>
-        <img><%=cl_image_tag @user.avatar.key, class: "profile"%><img>
-        <div class="info">
-          <h2><%= @user.first_name %> <%=  @user.last_name %></h2>
-          <div class="friend-interaction">
-            <a href="#" class="addfriend">Add Friend</a>
-            <a href="#" class="chat">Chat</a>
-          </div>
+      <img><%=cl_image_tag @user.avatar.key, class: "profile"%><img>
+      <div class="profile-info">
+        <h2 class="profile-name"><%= @user.first_name %> <%=  @user.last_name %></h2>
+        <div class="friend-interaction">
+          <% if Friend.reacted?(current_user, @user.id) ==  %>
+            <%= link_to friend_path(@friend), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="fa-solid fa-user-minus fa-xl text-danger delete-friend"></i>
+            <% end %>
+          <% else %>
+            <%= button_to user_friends_add_path(params[:id]), method: :post do%>
+              <i class="fa-solid fa-user-plus fa-xl"></i>
+            <% end %>
+          <% end %>
         </div>
-      </figcaption>
+      </div>
     </div>
   </div>
 <% end %>

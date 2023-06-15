@@ -7,7 +7,7 @@ class FriendsController < ApplicationController
 
   def create
     @asker_id = current_user
-    @receiver_id = User.find(friend_params[:receiver_id].to_i)
+    @receiver_id = User.find(params[:user_id].to_i)
     @friend = Friend.new(asker: @asker_id, receiver: @receiver_id)
     if Friend.reacted?(@friend.asker_id, @friend.receiver_id) == false && Friend.confirmed_record?(@friend.asker_id, @friend.receiver_id) == false
       @friend.save
@@ -18,7 +18,7 @@ class FriendsController < ApplicationController
     else
       flash.alert = "You are already a friend!"
     end
-    redirect_to user_friends_path(current_user)
+    redirect_to user_path(params[:user_id])
   end
 
   def destroy
