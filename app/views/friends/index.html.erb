@@ -4,30 +4,31 @@
       <h2 class= "text-center my-3">My Friends</h2>
         <ul>
           <% @friends.each do |friend| %>
-            <li class="list-friends "><% if friend.confirmed == true %>
-                  <%if friend.asker_id != current_user.id %>
-                    <% @user = User.find(friend.asker_id) %>
-                    <%= cl_image_tag @user.avatar.key, class: "avatar-friend" %>
-                    <p class="text-center mt-5"><strong><%= @user.full_name %></strong></p>
-                    <%= link_to friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do%>
-                      <i class="fa-solid fa-user-minus fa-xl text-danger delete-friend"></i>
-                    <% end %>
-                    <% if Chatroom.find_by(friend_id: friend.id) != nil %>
-                      <%= link_to chatroom_path(Chatroom.find_by(friend_id: friend.id)) do%>
-                        <i class="fa-solid fa-message fa-xl chat-icon"></i>
-                      <% end %>
-                    <% end %>
-                  <% else %>
-                    <% @user = User.find(friend.receiver_id) %>
-                    <%= cl_image_tag @user.avatar.key, class: "avatar-friend" %>
-                    <%= @user.full_name %>
-                    <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-                    <% if Chatroom.find_by(friend_id: friend.id) != nil %>
-                      <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+            <% if friend.confirmed == true %>
+              <li class="list-friends ">
+                <%if friend.asker_id != current_user.id %>
+                  <% @user = User.find(friend.asker_id) %>
+                  <%= cl_image_tag @user.avatar.key, class: "avatar-friend" %>
+                  <p class="text-center mt-5"><strong><%= @user.full_name %></strong></p>
+                  <%= link_to friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do%>
+                    <i class="fa-solid fa-user-minus fa-xl text-danger delete-friend"></i>
+                  <% end %>
+                  <% if Chatroom.find_by(friend_id: friend.id) != nil %>
+                    <%= link_to chatroom_path(Chatroom.find_by(friend_id: friend.id)) do%>
+                      <i class="fa-solid fa-message fa-xl chat-icon"></i>
                     <% end %>
                   <% end %>
+                <% else %>
+                  <% @user = User.find(friend.receiver_id) %>
+                  <%= cl_image_tag @user.avatar.key, class: "avatar-friend" %>
+                  <%= @user.full_name %>
+                  <%= link_to "Unfriend", friend_path(friend),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+                  <% if Chatroom.find_by(friend_id: friend.id) != nil %>
+                    <%= link_to "Chat", chatroom_path(Chatroom.find_by(friend_id: friend.id))%>
+                  <% end %>
                 <% end %>
-            </li>
+              </li>
+            <% end %>
           <% end %>
         </ul>
     </div>
