@@ -20,10 +20,34 @@
   <div class="centered-container">
     <%= link_to "See more events", events_path, class: "event-list-link" %>
   </div>
+  <%# MY EVENTS CARDS %>
+    <div class="next-events">
+    <h2 class="home-sub-heading">My Created Events</h2>
+    <div class="events-cards-grid">
+      <% @events.select { |event| (event.event_date - Date.today).to_i >= 0 }
+                  .sort_by { |event| (event.event_date - Date.today).to_i }
+                  .each do |event| %>
+        <%= link_to event_path(event) do %>
+          <div class="next-event-card">
+            <div class="card-img" style="background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8)), url('<%=cl_image_path event.photo.key%>')"></div>
+            <div class="card-info">
+              <h4><strong><%= event.title %></strong></h4>
+              <h5><%= event.event_date.strftime("%B ") + event.event_date.day.ordinalize %></h5>
+              <% if (event.event_date - Date.today).to_i.zero? %>
+                <p><em><strong style="color: #4CAF50;">Today!</strong></em></p>
+              <% elsif (event.event_date - Date.today).to_i > 0 %>
+                <p><em>in <strong style="color: red;"><%= (event.event_date - Date.today).to_i %></strong> days</em></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
   <%# NEXT EVENTS CARDS %>
   <div class="next-events">
-    <h2 class="home-sub-heading">Next Events</h2>
+    <h2 class="home-sub-heading">Upcoming Events</h2>
     <div class="events-cards-grid">
       <% @events_home.select { |event| (event.event_date - Date.today).to_i >= 0 }
                   .sort_by { |event| (event.event_date - Date.today).to_i }

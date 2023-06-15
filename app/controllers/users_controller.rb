@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[edit show]
 
   def home
+    @events = Event.where(user_id: current_user.id)
     @events_home = []
     @events_days = []
     @participants = Participant.where(user_id: current_user)
