@@ -15,12 +15,14 @@
 
   .messages {
     height: 58vh;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding: 1rem;
-    p{
-      margin-bottom: 0;
-      font-size: small;
-    }
+  }
+
+  .messages p {
+    margin-bottom: 0;
+    font-size: small;
   }
 
   #new_message {

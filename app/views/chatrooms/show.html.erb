@@ -5,8 +5,7 @@
     data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
     data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
     <% if @friend.asker_id == current_user.id || @friend.receiver_id == current_user.id %>
-      <div class="chatroom" style="height: 89.5vh;" data-controller="chatroom-subscription"
-      data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+      <div class="chatroom" style="height: 89.5vh;">
         <h1><% @chatroom.id%></h1>
 
         <div class="messages" data-chatroom-subscription-target="messages">
