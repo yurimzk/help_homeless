@@ -23,10 +23,9 @@ class Friend < ApplicationRecord
 
   def self.find_invitation(id1, id2)
     if Friend.where(asker_id: id1, receiver_id: id2, confirmed: true).empty?
-      @friends = Friend.where(asker_id: id2, receiver_id: id1, confirmed: true)[0]
+      Friend.where(asker_id: id2, receiver_id: id1, confirmed: true)[0].id
     else
-      @friends = Friend.where(asker_id: id1, receiver_id: id2, confirmed: true)[0]
+      Friend.where(asker_id: id1, receiver_id: id2, confirmed: true)[0].id
     end
-    @friends = @friends.id
   end
 end
