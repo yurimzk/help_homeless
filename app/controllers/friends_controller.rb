@@ -18,13 +18,13 @@ class FriendsController < ApplicationController
     else
       flash.alert = "You are already a friend!"
     end
-    redirect_to user_path(current_user)
+    redirect_to user_friends_path(current_user)
   end
 
   def destroy
     @friend = Friend.find(params[:id])
     @friend.destroy
-    redirect_to user_path(current_user)
+    redirect_to user_friends_path(current_user)
   end
 
   def update
@@ -32,7 +32,7 @@ class FriendsController < ApplicationController
     @friend = Friend.find(params[:id])
     @friend.confirmed = true
     @friend.save
-    redirect_to user_path(current_user)
+    redirect_to user_friends_path(current_user)
   end
 
   private
