@@ -17,13 +17,13 @@
       <div class="profile-info">
         <h2 class="profile-name"><%= @user.first_name %> <%=  @user.last_name %></h2>
         <div class="friend-interaction">
-          <% if Friend.reacted?(current_user, @user.id) ==  %>
-            <%= link_to friend_path(@friend), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <% if Friend.confirmed_record?(current_user, params[:id]) == true %>
+            <%= link_to friend_path(Friend.find_invitation(current_user, params[:id])), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
               <i class="fa-solid fa-user-minus fa-xl text-danger delete-friend"></i>
             <% end %>
           <% else %>
             <%= button_to user_friends_add_path(params[:id]), method: :post do%>
-              <i class="fa-solid fa-user-plus fa-xl"></i>
+              <i class="addfriend fa-solid fa-user-plus fa-xl"></i>
             <% end %>
           <% end %>
         </div>

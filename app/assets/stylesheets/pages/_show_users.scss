@@ -68,30 +68,21 @@
   top: 220px;
 }
 
-.snip1336 .addfriend {
-  margin-right: 4%;
-  border-color: #2980b9;
-  color: #2980b9;
-}
+.friend-interaction {
+  .addfriend {
+    padding: 20px 10px;
+    background-color: #2980b9;
+    color: #f5f5f5;
+    text-decoration: none;
+  }
 
-.friend-info {
-  margin-top: 125px;
-  font-weight: 300;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  a {
+    position: absolute;
 
-}
-
-.friend-interaction a {
-  padding: 10px 15px;
-  background-color: #2980b9;
-  color: #f5f5f5;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.friend-interaction a.addfriend {
-  background-color: #2980b9;
-  color: #f5f5f5;
+    i {
+      position: relative;
+      bottom: 25px;
+      left: -10px;
+    }
+  }
 }
