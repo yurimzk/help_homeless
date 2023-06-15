@@ -11,8 +11,8 @@
     <div data-refresh-target="search" class="d-none">
       <div class="row justify-content-center navbar_search">
         <%= form_with url: events_path, method: :get, class: "d-flex" do %>
-          <%= text_field_tag :query, params[:query], class: "form-control"%>
-          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+          <%= text_field_tag :query, params[:query], class: "form-control", style:"border: 1px solid black"%>
+          <%= submit_tag "Search", name: "", class: "button-50 text-black p-2 mt-1 mx-2" %>
         <% end %>
       </div>
     </div>
