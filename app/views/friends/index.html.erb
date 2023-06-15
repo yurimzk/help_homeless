@@ -1,6 +1,7 @@
 <div class="friend-grid">
   <div class="bg-friend-list-cards">
     <div>
+      <h2 class= "text-center my-3">My Friends</h2>
         <ul>
           <% @friends.each do |friend| %>
             <li class="list-friends "><% if friend.confirmed == true %>
@@ -32,5 +33,17 @@
     </div>
   </div>
   <div class="bg-friend-list-cards">
+    <h2 class= "text-center my-3">My Requests</h2>
+      <ul>
+        <% @friends.each do |friend| %>
+          <li><%if friend.asker_id != current_user.id && friend.confirmed == false %>
+                  <% @user = User.find(friend.asker_id) %>
+                  <%= cl_image_tag @user.avatar.key, class: "avatar-large" %>
+                  <%= @user.full_name %>
+                  <%= button_to "accept this friendship", [current_user, friend], method: 'patch'  %>
+              <% end %>
+          </li>
+        <% end %>
+      </ul>
   </div>
 </div>
