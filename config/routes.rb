@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: "users#landing"
   get "/my_events", to: "users#home", as: :my_events
   resources :users, only: %i[show update edit] do
-    resources :friends, only: %i[index create update]
+    resources :friends, only: %i[index update]
+    post '/friends', to: 'friends#create', as: :friends_add
   end
   resources :chatrooms, only: %i[show create] do
     resources :messages, only: %i[create]
