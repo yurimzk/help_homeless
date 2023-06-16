@@ -33,7 +33,7 @@ avatar_file = URI.open(avatar_url)
 user.avatar.attach(io: avatar_file, filename: 'avatar.jpg', content_type: 'image/jpeg' )
 user.save!
 
-user = User.new(email: "leo@lewagon.com", password: "123456", first_name: "Leonardo", last_name: "Alves", address: "Avenida Almirante Alexandrino 2000, Rio de Janeiro, Brasil")
+user = User.new(email: "leo@lewagon.com", password: "123456", first_name: "Leonardo", last_name: "Alves", address: "Rua Almirante Cochrane 240, Tijuca, Rio de Janeiro, Brasil")
 avatar_url = "https://res.cloudinary.com/dtz9smyye/image/upload/v1686254683/T02NE0241-U05426RHZDW-e6cf35666906-512_pwvhbs.jpg"
 avatar_file = URI.open(avatar_url)
 user.avatar.attach(io: avatar_file, filename: 'avatar.jpg', content_type: 'image/jpeg' )
