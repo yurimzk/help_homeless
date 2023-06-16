@@ -11,10 +11,10 @@
       <h4 class="my-4"><strong>Address:</strong> <%= @event.address %></h4>
       <% if @event.user_id != current_user.id %>
         <% if !@participantdestroy.nil? %>
-            <%= link_to "Leave Event", participant_path(@participantdestroy), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger border-0 my-3 rounded-3 text-white" %>
+            <%= link_to "Leave Event", participant_path(@participantdestroy), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"button-50-red" %>
           <% else %>
             <%= simple_form_for [@event, @participant] do |f| %>
-            <%= f.button :submit, 'Join Event', class: "btn btn-primary border-0 my-3 rounded-3" %>
+            <%= f.button :submit, 'Join Event', class: "button-50" %>
           <% end %>
         <% end %>
       <% end %>
@@ -28,7 +28,7 @@
             <h2>Add a post</h2>
             <%= simple_form_for [@event, @post] do |f| %>
               <%= f.input :content, label: false %>
-              <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+              <%= f.submit class: "button-50" %>
             <% end %>
             <h4>Posts</h4>
             <div class="comments-container">
@@ -97,7 +97,7 @@
                             <div data-comments-target="form" class="d-none">
                               <%= simple_form_for [post, @comment] do |f| %>
                                 <%= f.input :content, label: "Write a comment", :required => false %>
-                                <%= f.submit class: "btn btn-primary border-0 my-3 rounded-3" %>
+                                <%= f.submit class: "button-50" %>
                               <% end %>
                             </div>
                             </li>
